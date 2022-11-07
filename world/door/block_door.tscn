@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://6rgblwkwaw6v"]
+
+[ext_resource type="Script" path="res://world/door/block_door.gd" id="1_tux7r"]
+[ext_resource type="Curve2D" uid="uid://jw0yvthht4bj" path="res://world/door/block_door_path.tres" id="2_57k4a"]
+[ext_resource type="Shape2D" uid="uid://cxidkq2kfr583" path="res://world/door/door_shape.tres" id="4_fq60q"]
+[ext_resource type="Texture2D" uid="uid://dtec6qxbrg3ym" path="res://assets/world/door_wall.png" id="5_ut41x"]
+
+[node name="BlockDoor" type="Node2D" node_paths=PackedStringArray("path_follower")]
+texture_filter = 1
+script = ExtResource("1_tux7r")
+path_follower = NodePath("DoorOpenPath/PathFollower")
+
+[node name="DoorOpenPath" type="Path2D" parent="."]
+curve = ExtResource("2_57k4a")
+
+[node name="PathFollower" type="PathFollow2D" parent="DoorOpenPath"]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DoorOpenPath/PathFollower"]
+remote_path = NodePath("../../../DoorBody")
+
+[node name="DoorBody" type="AnimatableBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="DoorBody"]
+visible = false
+shape = ExtResource("4_fq60q")
+
+[node name="Sprite" type="Sprite2D" parent="DoorBody"]
+rotation = 1.5708
+texture = ExtResource("5_ut41x")

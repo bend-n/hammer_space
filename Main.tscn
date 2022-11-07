@@ -1,3 +1,48 @@
-[gd_scene format=2]
+[gd_scene load_steps=23 format=3 uid="uid://b4g41v2qctg7f"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_l4fqe"]
+[ext_resource type="PackedScene" uid="uid://c1fgxkkh72npw" path="res://player/player.tscn" id="1_ug1uc"]
+[ext_resource type="PackedScene" uid="uid://c8hhhk21dtpe0" path="res://levels/Start.tscn" id="2_vg2cv"]
+[ext_resource type="Script" path="res://levels/LevelManager.gd" id="3_yuvn4"]
+[ext_resource type="PackedScene" uid="uid://txq8h42d4oqi" path="res://levels/rand/01.tscn" id="4_e4ceh"]
+[ext_resource type="PackedScene" uid="uid://gev80rx2b8vn" path="res://levels/rand/02.tscn" id="5_vqiwr"]
+[ext_resource type="PackedScene" uid="uid://esupr5vkktt" path="res://levels/rand/03.tscn" id="6_v5xvb"]
+[ext_resource type="PackedScene" uid="uid://wgp3b5vk3qbs" path="res://levels/rand/04.tscn" id="7_rihcm"]
+[ext_resource type="PackedScene" uid="uid://lb0i4wxlcdo3" path="res://levels/rand/05.tscn" id="8_5a36k"]
+[ext_resource type="PackedScene" uid="uid://cmex8m63vfpoj" path="res://levels/rand/06.tscn" id="9_3vmkv"]
+[ext_resource type="PackedScene" uid="uid://bh0o48w2ir4l2" path="res://levels/rand/07.tscn" id="10_7n0bw"]
+[ext_resource type="PackedScene" uid="uid://x3fddi5udbur" path="res://levels/rand/08.tscn" id="11_skonw"]
+[ext_resource type="PackedScene" uid="uid://b7w7ns27n53rh" path="res://levels/rand/09.tscn" id="12_5n213"]
+[ext_resource type="PackedScene" uid="uid://gyxkjwsih0s2" path="res://levels/rand/10.tscn" id="13_ni5ug"]
+[ext_resource type="PackedScene" uid="uid://bkywu3kc1xfep" path="res://levels/rand/11.tscn" id="14_uubx2"]
+[ext_resource type="PackedScene" uid="uid://dnn448k214c42" path="res://levels/rand/12.tscn" id="15_x5iyq"]
+[ext_resource type="PackedScene" uid="uid://dkci2hmtjgrvj" path="res://levels/rand/13.tscn" id="16_xq64q"]
+[ext_resource type="PackedScene" uid="uid://bxokgsjhvo0ad" path="res://levels/rand/14.tscn" id="17_c4kk1"]
+[ext_resource type="PackedScene" uid="uid://cnwifdbe2eqv8" path="res://levels/rand/15.tscn" id="18_mpe1f"]
+[ext_resource type="PackedScene" uid="uid://d4dwvcp6764bx" path="res://levels/rand/16.tscn" id="19_ko67h"]
+[ext_resource type="PackedScene" uid="uid://duo0cbnh5u3qt" path="res://levels/rand/17.tscn" id="20_f85eu"]
+[ext_resource type="PackedScene" uid="uid://cy3kc27btbipt" path="res://levels/rand/18.tscn" id="21_rvdjm"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_l4fqe")
+
+[node name="player" parent="." instance=ExtResource("1_ug1uc")]
+position = Vector2(128, 96)
+
+[node name="Start" parent="." instance=ExtResource("2_vg2cv")]
+layer_0/tile_data = PackedInt32Array(131072, 0, 1, 196608, 0, 1, 262144, 262144, 1, 327680, 196608, 1, 393216, 196608, 2, 589824, 196608, 0, 655360, 196608, 1, 720896, 262144, 2, 786432, 0, 1, 851968, 0, 1, 917504, 0, 1, 983040, 0, 2, 983041, 65536, 2, 2, 65536, 0, 983042, 327680, 3, 3, 65536, 0, 983043, 65536, 3, 4, 65536, 0, 983044, 65536, 3, 5, 327680, 0, 983045, 65536, 3, 6, 131072, 3, 393222, 0, 0, 524294, 0, 1, 589830, 0, 2, 983046, 131072, 3, 524295, 65536, 1, 589831, 65536, 2, 393224, 65536, 0, 458760, 65536, 1, 524296, 65536, 1, 589832, 65536, 2, 9, 0, 0, 393225, 131072, 0, 458761, 131072, 1, 524297, 131072, 1, 589833, 131072, 2, 983049, 0, 3, 10, 327680, 0, 983050, 65536, 3, 11, 65536, 3, 983051, 65536, 3, 12, 393216, 0, 983052, 65536, 3, 13, 65536, 0, 983053, 65536, 3, 14, 65536, 0, 983054, 65536, 3, 15, 131072, 0, 65551, 458752, 1, 131087, 196608, 1, 196623, 196608, 1, 262159, 196608, 1, 327695, 196608, 1, 393231, 196608, 2, 589839, 196608, 0, 655375, 196608, 1, 720911, 196608, 1, 786447, 196608, 1, 851983, 196608, 1, 917519, 196608, 1, 983055, 458752, 3, 65536, 0, 1, 0, 0, 0, 1, 65536, 0, 458758, 0, 1, 393223, 65536, 0, 458759, 65536, 1, 917516, 196609, 0, 917517, 262145, 0, 851982, 196609, 0, 917518, 327681, 0, 917505, 65536, 1, 917506, 131072, 1, 851970, 131072, 0, 851969, 327680, 2, 786433, 131072, 1, 720897, 131072, 0, 786439, 0, 0, 786440, 327680, 0, 851976, 131072, 2, 851975, 0, 2, 786441, 131072, 3, 393220, 196608, 2, 327684, 196608, 1, 262148, 458752, 1, 393228, 196608, 0, 458764, 196608, 1, 524300, 196608, 1, 589836, 196608, 2, 262147, 65536, 2, 262146, 65536, 2, 262145, 65536, 2, 196609, 65536, 1, 131073, 65536, 1, 65537, 65536, 1, 65538, 65536, 1, 131074, 65536, 1, 196610, 65536, 1, 65539, 65536, 1, 131075, 65536, 1, 196611, 65536, 1, 196612, 131072, 1, 131076, 327680, 1, 131077, 131072, 2, 65540, 65536, 1, 65548, 0, 1, 65549, 327680, 1, 131085, 458752, 1, 131084, 0, 2, 196621, 196608, 2, 65550, 65536, 2, 65546, 131072, 1, 131082, 131072, 2, 65545, 0, 1, 131081, 262144, 1, 196617, 196608, 2, 65541, 131072, 1)
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("current_level", "player")]
+unique_name_in_owner = true
+script = ExtResource("3_yuvn4")
+levels = [ExtResource("4_e4ceh"), ExtResource("5_vqiwr"), ExtResource("6_v5xvb"), ExtResource("7_rihcm"), ExtResource("8_5a36k"), ExtResource("9_3vmkv"), ExtResource("10_7n0bw"), ExtResource("11_skonw"), ExtResource("12_5n213"), ExtResource("13_ni5ug"), ExtResource("14_uubx2"), ExtResource("15_x5iyq"), ExtResource("16_xq64q"), ExtResource("17_c4kk1"), ExtResource("18_mpe1f"), ExtResource("19_ko67h"), ExtResource("20_f85eu"), ExtResource("21_rvdjm")]
+current_level = NodePath("../Start")
+player = NodePath("../player")
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(128, 128)
+current = true
+zoom = Vector2(1.25, 1.25)
+
+[connection signal="world_generated" from="LevelManager" to="." method="_on_level_manager_world_generated"]

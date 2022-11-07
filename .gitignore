@@ -7,3 +7,5 @@ logs/
 exports/
 *.x86_64
 addons/
+.godot/
+maze.png*

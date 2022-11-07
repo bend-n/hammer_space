@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6o1bfy3xhjbm"]
+
+[node name="Effect" type="Node2D"]
+texture_filter = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
