@@ -17,3 +17,6 @@ static func str_vec(vec: Vector2) -> String:
 
 static func sub(a: Array, b: Array) -> Array:
 	return a.filter(func(item) -> bool: return not item in b)
+
+static func out_of_bounds(v: Vector2i, rect: Vector2i) -> bool:
+	return v.x > rect.x or v.y > rect.y or v.x < 0 or v.y < 0

@@ -46,7 +46,6 @@ func sort_levels():
   for level in levels:
     var n: int = 0 if level.get_state().get_node_property_count(0) == 1 else level.get_state().get_node_property_value(0,1)
     sorted[n].append(level)
-    prints(level.get_state().get_node_name(0),"=>", n)
 
 
 func _ready() -> void:

@@ -18,6 +18,7 @@ func _init(p_size: Vector2i) -> void:
     _size = p_size
     randomize()
     _make_maze()
+    erase()
 
 
 func _check_neighbours(cell: Vector2i, unvisited: Array[Vector2i]) -> Array[Vector2i]:
@@ -48,9 +49,9 @@ func _make_maze() -> void:
         var row: PackedInt32Array = []
         for y in range(_size.y):
             row.append(N | E | S | W)  #N|E|S|W = 15
-            unvisited.append(Vector2i(x,y))
+            unvisited.append(Vector2i(x, y))
         maze.append(row)
-    
+
     var current := Vector2i(0, 0)
     unvisited.erase(current)
 
@@ -90,9 +91,45 @@ static func tile_4b_to_wall_array(tile_4b: int) -> Array[Vector2i]:
         array.append(Vector2i.LEFT)
     return array
 
+
+func erase():
+    const three_walled: Array[int] = [7, 11, 13, 14]
+    # randomly remove a number of map walls.
+    for x in range(_size.x):
+        for y in range(_size.y):
+            if maze[y][x] in three_walled or randi() % 3 == 0:
+                var cell := Vector2i(x, y)
+                var i := randi() % 4
+                for _i in range(4):
+                    var n: Vector2i = _cell_walls.keys()[i]
+                    i = wrapi(i + _i, 0, 3)
+                    if get_cellv(cell) & _cell_walls[n]:
+                        var n_cell := (cell + n)
+                        if Util.out_of_bounds(n_cell, _size - Vector2i.ONE):
+                            continue
+                        var walls: int = get_cellv(cell) - _cell_walls[n]
+                        var n_walls: int = get_cellv(n_cell) - _cell_walls[-n]
+                        if (
+                            (x == 0 and walls & W)
+                            or (y == 0 and walls & N)
+                            or (x == _size.x and walls & E)
+                            or (y == _size.y and walls & S)
+                            or (n_cell.x == 0 and n_walls & W)
+                            or (n_cell.y == 0 and n_walls & N)
+                            or (n_cell.x == _size.x and n_walls & E)
+                            or (n_cell.y == _size.y and n_walls & S)
+                        ):
+                            continue
+                        if walls in three_walled or n_walls in three_walled:
+                            continue
+                        set_cellv(cell, walls)
+                        set_cellv(n_cell, n_walls)
+                        break
+
+
 func image() -> Image:
-    var img := Image.create(_size.x*3, _size.y*3, false, Image.FORMAT_L8)
-    
+    var img := Image.create(_size.x * 3, _size.y * 3, false, Image.FORMAT_L8)
+
     const ALL_DOORS := [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
     var position := Vector2i.ZERO
     for i in len(maze):
