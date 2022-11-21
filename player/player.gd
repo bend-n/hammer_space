@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Hittable
 class_name Player
 
 const DustEffect := preload("res://fx/dust.tscn")
@@ -21,12 +21,11 @@ const WallJumpEffect := preload("res://fx/wall_dust.tscn")
 
 @onready var GRAVITY: float = ProjectSettings.get_setting(&"physics/2d/default_gravity")
 
-const FLOOR_MAX_ANGLE := deg_to_rad(46)
-
-
 func _init() -> void:
-	floor_max_angle = FLOOR_MAX_ANGLE
+	Globals.player = self
 
+func _exit_tree() -> void:
+	Globals.player = null
 
 enum State { MOVE, WALL_SLIDE, STOP }
 

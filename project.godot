@@ -19,10 +19,30 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://world/door/door.gd"
 }, {
+"base": "Hittable",
+"class": &"Enemy",
+"language": &"GDScript",
+"path": "res://enemys/Enemy.gd"
+}, {
+"base": "Area2D",
+"class": &"Hammer",
+"language": &"GDScript",
+"path": "res://hammers/hammer.gd"
+}, {
+"base": "CharacterBody2D",
+"class": &"Hittable",
+"language": &"GDScript",
+"path": "res://colliders/hittable.gd"
+}, {
+"base": "Area2D",
+"class": &"Hurtbox",
+"language": &"GDScript",
+"path": "res://colliders/hurtbox.gd"
+}, {
 "base": "TileMap",
 "class": &"Level",
 "language": &"GDScript",
-"path": "res://levels/BaseTemplate.gd"
+"path": "res://levels/Level.gd"
 }, {
 "base": "Node",
 "class": &"LevelManager",
@@ -39,10 +59,15 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://world/one_way_platform.gd"
 }, {
-"base": "CharacterBody2D",
+"base": "Hittable",
 "class": &"Player",
 "language": &"GDScript",
 "path": "res://player/player.gd"
+}, {
+"base": "Line2D",
+"class": &"Trail2D",
+"language": &"GDScript",
+"path": "res://fx/trail.gd"
 }, {
 "base": "Node",
 "class": &"Util",
@@ -52,11 +77,16 @@ _global_script_classes=[{
 _global_script_class_icons={
 "BlockDoor": "",
 "Door": "",
-"Level": "",
+"Enemy": "",
+"Hammer": "res://assets/hammers/hammer01.png",
+"Hittable": "",
+"Hurtbox": "",
+"Level": "res://levels/level_icon.svg",
 "LevelManager": "",
 "Maze": "",
 "OneWayPlatform": "",
 "Player": "",
+"Trail2D": "res://fx/trail2d_icon.svg",
 "Util": ""
 }
 
@@ -72,6 +102,7 @@ config/features=PackedStringArray("4.0")
 
 Utils="*res://autoloads/Utils.gd"
 Events="*res://autoloads/Events.gd"
+Globals="*res://autoloads/Globals.gd"
 
 [debug]
 
@@ -131,7 +162,9 @@ down={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
-2d_physics/layer_3="enemy"
+2d_physics/layer_3="player_hurt"
+2d_physics/layer_4="enemy_hurt"
+2d_physics/layer_5="enemy"
 
 [logging]
 

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://lsx00k2cigtf"]
+
+[ext_resource type="PackedScene" uid="uid://bciufe82lwiaw" path="res://hammers/hammer_base.tscn" id="1_wc0io"]
+[ext_resource type="Texture2D" uid="uid://blx67dnlqysnc" path="res://assets/hammers/hammer03.png" id="2_0uj7a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06tn2"]
+size = Vector2(8, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0ws5"]
+size = Vector2(8, 12)
+
+[node name="Hammer03" instance=ExtResource("1_wc0io")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_0uj7a")
+
+[node name="Collision" parent="." index="1"]
+shape = SubResource("RectangleShape2D_06tn2")
+
+[node name="Hitbox" parent="." index="2"]
+damage = 3
+
+[node name="Collision" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_k0ws5")
+
+[editable path="Hitbox"]

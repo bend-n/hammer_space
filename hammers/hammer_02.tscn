@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd85psvumxs8"]
+
+[ext_resource type="PackedScene" uid="uid://bciufe82lwiaw" path="res://hammers/hammer_base.tscn" id="1_vy2k1"]
+[ext_resource type="Texture2D" uid="uid://bcpy0wbrlmqsq" path="res://assets/hammers/hammer02.png" id="2_dmvhv"]
+
+[node name="Hammer02" instance=ExtResource("1_vy2k1")]
+
+[node name="Trail2D" parent="." index="0"]
+z_index = -1
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_dmvhv")
+
+[node name="Hitbox" parent="." index="3"]
+damage = 2
+
+[editable path="Hitbox"]

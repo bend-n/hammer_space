@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bciufe82lwiaw"]
+
+[ext_resource type="PackedScene" uid="uid://cdpkxaateaqdf" path="res://colliders/hitbox.tscn" id="1_kdx5x"]
+[ext_resource type="Script" path="res://hammers/hammer.gd" id="1_xp22t"]
+[ext_resource type="Shape2D" uid="uid://bg3mq5wg3xtiy" path="res://hammers/8x14.tres" id="2_tgkvf"]
+[ext_resource type="Script" path="res://fx/trail.gd" id="4_boru3"]
+[ext_resource type="Curve" uid="uid://bud8anghktv2f" path="res://hammers/trail_width.tres" id="4_yvshk"]
+[ext_resource type="Gradient" uid="uid://bi35r2i1ue6ub" path="res://hammers/trail_color.tres" id="5_8dqv1"]
+
+[node name="Hammer" type="Area2D"]
+texture_filter = 1
+collision_layer = 0
+script = ExtResource("1_xp22t")
+
+[node name="Trail2D" type="Line2D" parent="."]
+position = Vector2(0, -6)
+z_index = -1
+points = PackedVector2Array(0, 0)
+width = 3.0
+width_curve = ExtResource("4_yvshk")
+gradient = ExtResource("5_8dqv1")
+round_precision = 4
+antialiased = true
+script = ExtResource("4_boru3")
+is_emitting = true
+lifetime = 2.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_tgkvf")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_kdx5x")]
+
+[node name="Collision" parent="Hitbox" index="0"]
+visible = false
+shape = ExtResource("2_tgkvf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="Hitbox"]

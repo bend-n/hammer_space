@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4g41v2qctg7f"]
+[gd_scene load_steps=25 format=3 uid="uid://b4g41v2qctg7f"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_l4fqe"]
 [ext_resource type="PackedScene" uid="uid://c1fgxkkh72npw" path="res://player/player.tscn" id="1_ug1uc"]
@@ -22,6 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://d4dwvcp6764bx" path="res://levels/rand/16.tscn" id="19_ko67h"]
 [ext_resource type="PackedScene" uid="uid://duo0cbnh5u3qt" path="res://levels/rand/17.tscn" id="20_f85eu"]
 [ext_resource type="PackedScene" uid="uid://cy3kc27btbipt" path="res://levels/rand/18.tscn" id="21_rvdjm"]
+[ext_resource type="PackedScene" uid="uid://f7wqdmugs712" path="res://enemys/wrencher.tscn" id="23_p2dy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htk2i"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -45,4 +48,21 @@ offset = Vector2(128, 128)
 current = true
 zoom = Vector2(1.25, 1.25)
 
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(164, 82)
+collision_layer = 8
+collision_mask = 11
+mass = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_htk2i")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-10, -10, -10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Wrencher" parent="." instance=ExtResource("23_p2dy5")]
+position = Vector2(16, 163)
+rotation = 1.57079
+
 [connection signal="world_generated" from="LevelManager" to="." method="_on_level_manager_world_generated"]
+[connection signal="died" from="Wrencher" to="Wrencher" method="die"]

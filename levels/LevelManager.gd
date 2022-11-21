@@ -14,7 +14,7 @@ const lvl_path_fmt := "res://levels/rand/%s.tscn"
 var lvl_position := Vector2i(-1, -1)
 var t: SceneTreeTimer
 
-var sorted := [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # Array[Array[PackedScene]] [[0..][1..]...[15..]]
+var sorted := [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # Array[PackedSceneArray] [[0..][1..]...[15..]]
 
 
 func go(to: Vector2i) -> void:
@@ -51,7 +51,7 @@ func sort_levels():
 func _ready() -> void:
   gen_map()
   lvl_position = size / 2
-  Events.connect(&"change_level", go)
+  Events.change_level.connect(go)
   print_map_pretty()
 
 
@@ -67,4 +67,4 @@ func gen_map() -> void:
       map_row.append(sorted[i][randi() % len(sorted[i])])
     map.append(map_row)
   map[lvl_position.x][lvl_position.y] = preload("res://levels/Start.tscn")
-  emit_signal(&"world_generated", maze)
+  world_generated.emit(maze)

@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://f7wqdmugs712"]
+
+[ext_resource type="PackedScene" uid="uid://baefo17xlk1n1" path="res://enemys/Enemy.tscn" id="1_7mo8u"]
+[ext_resource type="Texture2D" uid="uid://bbp683dgbfu76" path="res://assets/enemys/wrencher.png" id="2_0jx2r"]
+[ext_resource type="Script" path="res://enemys/wrencher.gd" id="2_ydgi0"]
+[ext_resource type="Shape2D" uid="uid://5mpwir3ab0ff" path="res://enemys/wrencher_collision.tres" id="3_fsg5e"]
+
+[sub_resource type="Animation" id="Animation_ghcxr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_3sxm5"]
+resource_name = "fire"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7, 0.8, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 6, 8, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kjtpb"]
+resource_name = "normal"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv8p0"]
+_data = {
+"RESET": SubResource("Animation_ghcxr"),
+"fire": SubResource("Animation_3sxm5"),
+"normal": SubResource("Animation_kjtpb")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3gtw"]
+size = Vector2(20, 50)
+
+[node name="Wrencher" node_paths=PackedStringArray("muzzle", "floorcast", "animator", "player_cast") instance=ExtResource("1_7mo8u")]
+script = ExtResource("2_ydgi0")
+ACCELERATION = 3
+MAX_SPEED = 32
+FRICTION = 0.8
+SHOT_COOLDOWN = 1
+muzzle = NodePath("Muzzle")
+floorcast = NodePath("FloorCast")
+animator = NodePath("AnimationPlayer")
+player_cast = NodePath("PlayerCast")
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2(0, -8)
+texture = ExtResource("2_0jx2r")
+hframes = 9
+frame = 4
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(0, -5)
+shape = ExtResource("3_fsg5e")
+
+[node name="Collision" parent="Hurtbox" index="0"]
+visible = false
+position = Vector2(0, -5)
+shape = ExtResource("3_fsg5e")
+
+[node name="Collision" parent="Hitbox" index="0"]
+visible = false
+position = Vector2(0, -5)
+shape = ExtResource("3_fsg5e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_bv8p0")
+}
+
+[node name="Muzzle" type="Node2D" parent="." index="5"]
+position = Vector2(0, -6)
+
+[node name="FloorCast" type="RayCast2D" parent="." index="6"]
+position = Vector2(0, -3)
+target_position = Vector2(0, 5)
+
+[node name="PlayerCast" type="ShapeCast2D" parent="." index="7"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_j3gtw")
+target_position = Vector2(0, -170)
+collision_mask = 3
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

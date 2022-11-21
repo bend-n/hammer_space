@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://h2yl2s2kudv8"]
+[gd_scene load_steps=3 format=3 uid="uid://cflva11kyp5ui"]
 
-[ext_resource type="Script" path="res://levels/BaseTemplate.gd" id="1_cubc7"]
+[ext_resource type="Script" path="res://levels/Level.gd" id="1_cubc7"]
 [ext_resource type="TileSet" uid="uid://dsw8frlrcnbi8" path="res://world/tiles.tres" id="1_r867i"]
 
-[node name="BaseTemplate" type="TileMap"]
+[node name="Level" type="TileMap"]
 texture_filter = 1
 tile_set = ExtResource("1_r867i")
 format = 2
