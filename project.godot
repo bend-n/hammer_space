@@ -93,9 +93,9 @@ _global_script_class_icons={
 [application]
 
 config/name="hammer space"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://ui/start.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="GodotTemplate"
+config/custom_user_dir_name="hamm"
 config/features=PackedStringArray("4.0")
 
 [autoload]

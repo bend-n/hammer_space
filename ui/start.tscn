@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkyf7pxcw2ks3"]
+
+[ext_resource type="Theme" uid="uid://b5sr8elfovyw3" path="res://ui/main.theme.tres" id="1_gj4yg"]
+
+[sub_resource type="GDScript" id="GDScript_52jbq"]
+resource_name = "start"
+script/source = "extends Button
+
+func _pressed() -> void:
+  get_tree().change_scene_to_file(\"res://Main.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_vtoxm"]
+resource_name = "exit"
+script/source = "extends Button
+
+func _pressed() -> void:
+  get_tree().quit()
+"
+
+[node name="start" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gj4yg")
+metadata/_edit_vertical_guides_ = []
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 74.0
+offset_top = 84.0
+offset_right = 246.0
+offset_bottom = 236.0
+
+[node name="StartButton" type="Button" parent="VBox"]
+layout_mode = 2
+offset_right = 172.0
+offset_bottom = 48.0
+text = "start"
+script = SubResource("GDScript_52jbq")
+
+[node name="CfgButtton" type="Button" parent="VBox"]
+layout_mode = 2
+offset_top = 52.0
+offset_right = 172.0
+offset_bottom = 100.0
+text = "configure"
+
+[node name="ExitButton" type="Button" parent="VBox"]
+layout_mode = 2
+offset_top = 104.0
+offset_right = 172.0
+offset_bottom = 152.0
+text = "<!) exit (!>"
+script = SubResource("GDScript_vtoxm")
