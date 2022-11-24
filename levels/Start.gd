@@ -1,12 +1,11 @@
 extends Level
 
-@onready var lvl_manager = $"../LevelManager"
-
 func _ready() -> void:
-  var maze: Maze = get_parent().maze
+  var lm: LevelManager = Globals.levelmanager
+  var maze: Maze = lm.maze
   if !maze:
-    maze = await lvl_manager.world_generated
-  enabled_walls = (maze.get_cellv(lvl_manager.size / 2))
+    maze = await lm.world_generated
+  enabled_walls = (maze.get_cellv(lm.size / 2))
   const wm := {
     Vector2i.UP: [Vector2i(7, 0), Vector2i(8, 0)],
     Vector2i.DOWN: [Vector2i(7, 15), Vector2i(8, 15)],

@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://6rgblwkwaw6v"]
+[gd_scene load_steps=5 format=3 uid="uid://0er8gkqgt7hi"]
 
 [ext_resource type="Script" path="res://world/door/block_door.gd" id="1_tux7r"]
-[ext_resource type="Curve2D" uid="uid://jw0yvthht4bj" path="res://world/door/block_door_path.tres" id="2_57k4a"]
-[ext_resource type="Shape2D" uid="uid://cxidkq2kfr583" path="res://world/door/door_shape.tres" id="4_fq60q"]
+[ext_resource type="Curve2D" path="res://world/door/block_door_path.tres" id="2_57k4a"]
+[ext_resource type="Shape2D" path="res://world/door/door_shape.tres" id="4_fq60q"]
 [ext_resource type="Texture2D" uid="uid://dtec6qxbrg3ym" path="res://assets/world/door_wall.png" id="5_ut41x"]
 
 [node name="BlockDoor" type="Node2D" node_paths=PackedStringArray("path_follower")]

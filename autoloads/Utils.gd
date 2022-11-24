@@ -2,13 +2,18 @@ extends Node
 class_name Util
 
 
-func instance_scene_on_main(scene: PackedScene, position: Vector2) -> Node:
-  var main := get_tree().current_scene
+static func instance_scene(scene: PackedScene, position: Vector2, on: Node) -> Node:
   var instance := scene.instantiate() as Node2D
-  main.add_child(instance)
+  on.add_child(instance)
   instance.global_position = position
   return instance
 
+
+func instance_scene_on_main(scene: PackedScene, position: Vector2) -> Node:
+  return Util.instance_scene(scene, position, get_tree().current_scene)
+
+func instance_scene_on_level(scene: PackedScene, position: Vector2) -> Node:
+  return Util.instance_scene(scene, position, Globals.levelmanager.current_level)
 
 static func str_vec(vec: Vector2) -> String:
   var map := {Vector2.UP: "up", Vector2.DOWN: "down", Vector2.LEFT: "left", Vector2.RIGHT: "right"}

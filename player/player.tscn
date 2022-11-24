@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1fgxkkh72npw"]
+[gd_scene load_steps=11 format=3 uid="uid://umj2kojm6mlo"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lnsyt"]
 [ext_resource type="Texture2D" uid="uid://b36hv0jwfmb1u" path="res://assets/player/animations.png" id="2_dgplu"]
-[ext_resource type="Shape2D" uid="uid://f1oxba248m0l" path="res://player/player_collision.tres" id="3_uoann"]
-[ext_resource type="PackedScene" uid="uid://qliv2erkwokh" path="res://colliders/hurtbox.tscn" id="4_yd6uo"]
-[ext_resource type="PackedScene" uid="uid://cdpkxaateaqdf" path="res://colliders/hitbox.tscn" id="5_wpn72"]
+[ext_resource type="Shape2D" uid="uid://csesrw07xpp24" path="res://player/player_collision.tres" id="3_uoann"]
+[ext_resource type="PackedScene" uid="uid://bgt7m0j1ier74" path="res://colliders/hurtbox.tscn" id="4_yd6uo"]
+[ext_resource type="PackedScene" uid="uid://ug40hxlkequx" path="res://colliders/hitbox.tscn" id="5_wpn72"]
 
 [sub_resource type="Animation" id="Animation_sbyxw"]
 resource_name = "idle"
@@ -37,7 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [29]
+"values": [9]
 }
 
 [sub_resource type="Animation" id="Animation_5lnnm"]
@@ -108,7 +108,8 @@ script = ExtResource("1_lnsyt")
 texture_filter = 1
 position = Vector2(0, -14)
 texture = ExtResource("2_dgplu")
-hframes = 30
+hframes = 11
+frame = 9
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)

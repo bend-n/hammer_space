@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn3jh3u6xksvj"]
+[gd_scene load_steps=7 format=3 uid="uid://cbbk6t41a267q"]
 
-[ext_resource type="PackedScene" uid="uid://6o1bfy3xhjbm" path="res://fx/fx.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://smkugd4xx0vm" path="res://fx/fx.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cuhf1q2aeyoau" path="res://assets/fx/dust.png" id="2"]
 [ext_resource type="Script" path="res://fx/dust.gd" id="3"]
 
-[sub_resource type="Animation" id="1"]
+[sub_resource type="Animation" id="Animation_5r1ca"]
 resource_name = "Animate"
 length = 0.3
 tracks/0/type = "value"
@@ -34,7 +34,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_p3u8k"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -49,10 +49,10 @@ tracks/0/keys = {
 "values": [2]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_60u2x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74s5a"]
 _data = {
-"Animate": SubResource("1"),
-"RESET": SubResource("2")
+"Animate": SubResource("Animation_5r1ca"),
+"RESET": SubResource("Animation_p3u8k")
 }
 
 [node name="DustEffect" instance=ExtResource("1")]
@@ -66,5 +66,5 @@ frame = 2
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Animate"
 libraries = {
-"": SubResource("AnimationLibrary_60u2x")
+"": SubResource("AnimationLibrary_74s5a")
 }

@@ -12,8 +12,8 @@ signal died
   set(value):
     health = clamp(value, 0, max_health)
     if health == 0:
-      died.emit() # voodoo magic makes this signal connect to die()
-      # die()
+      died.emit() # ~~voodoo magic makes this signal connect to die()~~
+      die() # the voodoo magic broke ;-;
 
 func hit(damage: int) -> void:
   health -= damage

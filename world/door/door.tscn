@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6frlgjdtxsnb"]
+[gd_scene load_steps=4 format=3 uid="uid://dhvalfppnefax"]
 
 [ext_resource type="Script" path="res://world/door/door.gd" id="1_t5c8c"]
-[ext_resource type="Shape2D" uid="uid://cxidkq2kfr583" path="res://world/door/door_shape.tres" id="4_ty3l8"]
+[ext_resource type="Shape2D" path="res://world/door/door_shape.tres" id="4_ty3l8"]
 [ext_resource type="Texture2D" uid="uid://ca243eorhvtp2" path="res://assets/world/door.png" id="4_weg0g"]
 
 [node name="door" type="Area2D"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjux3r57ffv8e"]
+[gd_scene load_steps=3 format=3 uid="uid://bsu0i18fxrwhj"]
 
-[ext_resource type="PackedScene" uid="uid://bciufe82lwiaw" path="res://hammers/hammer_base.tscn" id="1_350hj"]
+[ext_resource type="PackedScene" uid="uid://bimmd1hcj2h0e" path="res://hammers/hammer_base.tscn" id="1_350hj"]
 [ext_resource type="Texture2D" uid="uid://dcf5es758pw1n" path="res://assets/hammers/hammer01.png" id="2_sdlv5"]
 
 [node name="Hammer01" instance=ExtResource("1_350hj")]

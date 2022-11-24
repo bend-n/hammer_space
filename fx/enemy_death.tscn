@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b10daeo07yvlv"]
+[gd_scene load_steps=2 format=3 uid="uid://bbvxhy8b1c26q"]
 
 [ext_resource type="Script" path="res://fx/enemy_death.gd" id="1_pgtt6"]
 

@@ -101,8 +101,8 @@ config/features=PackedStringArray("4.0")
 [autoload]
 
 Utils="*res://autoloads/Utils.gd"
-Events="*res://autoloads/Events.gd"
 Globals="*res://autoloads/Globals.gd"
+Events="*res://autoloads/Events.gd"
 
 [debug]
 
@@ -170,6 +170,10 @@ down={
 
 file_logging/enable_file_logging=true
 
+[memory]
+
+limits/message_queue/max_size_kb=40960
+
 [physics]
 
 2d/run_on_separate_thread=true
@@ -177,7 +181,9 @@ file_logging/enable_file_logging=true
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+textures/default_filters/anisotropic_filtering_level=0
+environment/defaults/default_clear_color=Color(0.160784, 0.160784, 0.160784, 1)
+textures/canvas_textures/default_texture_filter=0
 quality/driver/driver_name="GLES2"
 2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0

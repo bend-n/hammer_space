@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://f7wqdmugs712"]
+[gd_scene load_steps=10 format=3 uid="uid://b0s1su8xjtxdj"]
 
-[ext_resource type="PackedScene" uid="uid://baefo17xlk1n1" path="res://enemys/Enemy.tscn" id="1_7mo8u"]
+[ext_resource type="PackedScene" uid="uid://cqssoh4optvhe" path="res://enemys/Enemy.tscn" id="1_7mo8u"]
 [ext_resource type="Texture2D" uid="uid://bbp683dgbfu76" path="res://assets/enemys/wrencher.png" id="2_0jx2r"]
 [ext_resource type="Script" path="res://enemys/wrencher.gd" id="2_ydgi0"]
-[ext_resource type="Shape2D" uid="uid://5mpwir3ab0ff" path="res://enemys/wrencher_collision.tres" id="3_fsg5e"]
+[ext_resource type="Shape2D" path="res://enemys/wrencher_collision.tres" id="3_fsg5e"]
 
 [sub_resource type="Animation" id="Animation_ghcxr"]
 length = 0.001
@@ -112,14 +112,16 @@ libraries = {
 "": SubResource("AnimationLibrary_bv8p0")
 }
 
-[node name="Muzzle" type="Node2D" parent="." index="5"]
+[node name="Muzzle" type="Marker2D" parent="." index="5"]
 position = Vector2(0, -6)
 
 [node name="FloorCast" type="RayCast2D" parent="." index="6"]
+visible = false
 position = Vector2(0, -3)
 target_position = Vector2(0, 5)
 
 [node name="PlayerCast" type="ShapeCast2D" parent="." index="7"]
+visible = false
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_j3gtw")
 target_position = Vector2(0, -170)

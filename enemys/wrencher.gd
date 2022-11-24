@@ -4,7 +4,7 @@ extends Enemy
 @export var MAX_SPEED := 32
 @export var FRICTION := .8
 @export var SHOT_COOLDOWN := 1
-@onready @export var muzzle: Node2D
+@onready @export var muzzle: Marker2D
 @onready @export var floorcast: RayCast2D
 @onready @export var animator: AnimationPlayer
 @onready @export var player_cast: ShapeCast2D
@@ -40,7 +40,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func fire() -> void:
-  var hammer: Hammer = Utils.instance_scene_on_main(Utils.get_hammer(), muzzle.global_position)
+  var hammer: Hammer = Utils.instance_scene_on_level(Utils.get_hammer(), muzzle.global_position)
   hammer.steer_force = 0.01 # cheat
   hammer.target = Globals.player
   hammer.direction = up_direction

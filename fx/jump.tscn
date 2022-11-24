@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyihdut47gar"]
+[gd_scene load_steps=6 format=3 uid="uid://cwispjaxo0gvv"]
 
-[ext_resource type="PackedScene" uid="uid://6o1bfy3xhjbm" path="res://fx/fx.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://smkugd4xx0vm" path="res://fx/fx.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://c7cnh7u3nstnh" path="res://assets/fx/jump.png" id="2"]
 
-[sub_resource type="Animation" id="1"]
+[sub_resource type="Animation" id="Animation_w7i3f"]
 resource_name = "Animate"
 length = 0.4
 tracks/0/type = "value"
@@ -33,7 +33,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_g27fn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -48,10 +48,10 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ity0p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqupq"]
 _data = {
-"Animate": SubResource("1"),
-"RESET": SubResource("2")
+"Animate": SubResource("Animation_w7i3f"),
+"RESET": SubResource("Animation_g27fn")
 }
 
 [node name="JumpEffect" instance=ExtResource("1")]
@@ -65,5 +65,5 @@ frame = 1
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Animate"
 libraries = {
-"": SubResource("AnimationLibrary_ity0p")
+"": SubResource("AnimationLibrary_lqupq")
 }

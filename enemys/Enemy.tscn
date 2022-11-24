@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://baefo17xlk1n1"]
+[gd_scene load_steps=4 format=3 uid="uid://cqssoh4optvhe"]
 
 [ext_resource type="Script" path="res://enemys/Enemy.gd" id="1_rvxwt"]
-[ext_resource type="PackedScene" uid="uid://qliv2erkwokh" path="res://colliders/hurtbox.tscn" id="2_c7rvc"]
-[ext_resource type="PackedScene" uid="uid://cdpkxaateaqdf" path="res://colliders/hitbox.tscn" id="3_cav1d"]
+[ext_resource type="PackedScene" uid="uid://bgt7m0j1ier74" path="res://colliders/hurtbox.tscn" id="2_c7rvc"]
+[ext_resource type="PackedScene" uid="uid://ug40hxlkequx" path="res://colliders/hitbox.tscn" id="3_cav1d"]
 
 [node name="Enemy" type="CharacterBody2D"]
 texture_filter = 1
@@ -12,11 +12,14 @@ script = ExtResource("1_rvxwt")
 [node name="Sprite" type="Sprite2D" parent="."]
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_c7rvc")]
+visible = false
 collision_layer = 8
 
 [node name="Hitbox" parent="." instance=ExtResource("3_cav1d")]
+visible = false
 collision_mask = 4
 
 [editable path="Hurtbox"]

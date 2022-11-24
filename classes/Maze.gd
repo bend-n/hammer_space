@@ -13,6 +13,11 @@ var _size: Vector2i = Vector2i(6, 6)
 
 var maze := []
 
+var image: Image = null:
+  get:
+    if not image:
+        image = gen_image()
+    return image
 
 func _init(p_size: Vector2i) -> void:
     _size = p_size
@@ -127,7 +132,7 @@ func erase():
                         break
 
 
-func image() -> Image:
+func gen_image() -> Image:
     var img := Image.create(_size.x * 3, _size.y * 3, false, Image.FORMAT_L8)
 
     const ALL_DOORS := [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]

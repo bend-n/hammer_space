@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cflva11kyp5ui"]
+[gd_scene load_steps=3 format=3 uid="uid://dxx21fiom4ef1"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_cubc7"]
-[ext_resource type="TileSet" uid="uid://dsw8frlrcnbi8" path="res://world/tiles.tres" id="1_r867i"]
+[ext_resource type="TileSet" uid="uid://dhq32uplaxvpl" path="res://world/tiles.tres" id="1_r867i"]
 
 [node name="Level" type="TileMap"]
 texture_filter = 1

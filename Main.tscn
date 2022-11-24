@@ -1,30 +1,27 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4g41v2qctg7f"]
+[gd_scene load_steps=23 format=3 uid="uid://dcaws2iac7w3y"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_l4fqe"]
-[ext_resource type="PackedScene" uid="uid://c1fgxkkh72npw" path="res://player/player.tscn" id="1_ug1uc"]
-[ext_resource type="PackedScene" uid="uid://c8hhhk21dtpe0" path="res://levels/Start.tscn" id="2_vg2cv"]
+[ext_resource type="PackedScene" uid="uid://umj2kojm6mlo" path="res://player/player.tscn" id="1_ug1uc"]
+[ext_resource type="PackedScene" uid="uid://dqxnsdq67j23x" path="res://levels/Start.tscn" id="2_vg2cv"]
 [ext_resource type="Script" path="res://levels/LevelManager.gd" id="3_yuvn4"]
-[ext_resource type="PackedScene" uid="uid://txq8h42d4oqi" path="res://levels/rand/01.tscn" id="4_e4ceh"]
-[ext_resource type="PackedScene" uid="uid://gev80rx2b8vn" path="res://levels/rand/02.tscn" id="5_vqiwr"]
-[ext_resource type="PackedScene" uid="uid://esupr5vkktt" path="res://levels/rand/03.tscn" id="6_v5xvb"]
-[ext_resource type="PackedScene" uid="uid://wgp3b5vk3qbs" path="res://levels/rand/04.tscn" id="7_rihcm"]
-[ext_resource type="PackedScene" uid="uid://lb0i4wxlcdo3" path="res://levels/rand/05.tscn" id="8_5a36k"]
-[ext_resource type="PackedScene" uid="uid://cmex8m63vfpoj" path="res://levels/rand/06.tscn" id="9_3vmkv"]
-[ext_resource type="PackedScene" uid="uid://bh0o48w2ir4l2" path="res://levels/rand/07.tscn" id="10_7n0bw"]
-[ext_resource type="PackedScene" uid="uid://x3fddi5udbur" path="res://levels/rand/08.tscn" id="11_skonw"]
-[ext_resource type="PackedScene" uid="uid://b7w7ns27n53rh" path="res://levels/rand/09.tscn" id="12_5n213"]
-[ext_resource type="PackedScene" uid="uid://gyxkjwsih0s2" path="res://levels/rand/10.tscn" id="13_ni5ug"]
-[ext_resource type="PackedScene" uid="uid://bkywu3kc1xfep" path="res://levels/rand/11.tscn" id="14_uubx2"]
-[ext_resource type="PackedScene" uid="uid://dnn448k214c42" path="res://levels/rand/12.tscn" id="15_x5iyq"]
-[ext_resource type="PackedScene" uid="uid://dkci2hmtjgrvj" path="res://levels/rand/13.tscn" id="16_xq64q"]
-[ext_resource type="PackedScene" uid="uid://bxokgsjhvo0ad" path="res://levels/rand/14.tscn" id="17_c4kk1"]
-[ext_resource type="PackedScene" uid="uid://cnwifdbe2eqv8" path="res://levels/rand/15.tscn" id="18_mpe1f"]
-[ext_resource type="PackedScene" uid="uid://d4dwvcp6764bx" path="res://levels/rand/16.tscn" id="19_ko67h"]
-[ext_resource type="PackedScene" uid="uid://duo0cbnh5u3qt" path="res://levels/rand/17.tscn" id="20_f85eu"]
-[ext_resource type="PackedScene" uid="uid://cy3kc27btbipt" path="res://levels/rand/18.tscn" id="21_rvdjm"]
-[ext_resource type="PackedScene" uid="uid://f7wqdmugs712" path="res://enemys/wrencher.tscn" id="23_p2dy5"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_htk2i"]
+[ext_resource type="PackedScene" uid="uid://bujj6au21fw2" path="res://levels/rand/01.tscn" id="4_e4ceh"]
+[ext_resource type="PackedScene" uid="uid://yl0khissgys3" path="res://levels/rand/02.tscn" id="5_vqiwr"]
+[ext_resource type="PackedScene" uid="uid://cc2cke0h0rq2" path="res://levels/rand/03.tscn" id="6_v5xvb"]
+[ext_resource type="PackedScene" uid="uid://byccymelwvur8" path="res://levels/rand/04.tscn" id="7_rihcm"]
+[ext_resource type="PackedScene" uid="uid://hr0ueup48w71" path="res://levels/rand/05.tscn" id="8_5a36k"]
+[ext_resource type="PackedScene" uid="uid://887jva236kjn" path="res://levels/rand/06.tscn" id="9_3vmkv"]
+[ext_resource type="PackedScene" uid="uid://dsjel2dj0wjo2" path="res://levels/rand/07.tscn" id="10_7n0bw"]
+[ext_resource type="PackedScene" uid="uid://s1lsinwfques" path="res://levels/rand/08.tscn" id="11_skonw"]
+[ext_resource type="PackedScene" uid="uid://e4kinwyx5821" path="res://levels/rand/09.tscn" id="12_5n213"]
+[ext_resource type="PackedScene" uid="uid://dd74d1a4uirhr" path="res://levels/rand/10.tscn" id="13_ni5ug"]
+[ext_resource type="PackedScene" uid="uid://dip1l1cd8s8p0" path="res://levels/rand/11.tscn" id="14_uubx2"]
+[ext_resource type="PackedScene" uid="uid://bfpc41oqcf0qw" path="res://levels/rand/12.tscn" id="15_x5iyq"]
+[ext_resource type="PackedScene" uid="uid://ml0vpr107gc8" path="res://levels/rand/13.tscn" id="16_xq64q"]
+[ext_resource type="PackedScene" uid="uid://cpg5dac48jhj0" path="res://levels/rand/14.tscn" id="17_c4kk1"]
+[ext_resource type="PackedScene" uid="uid://bk6x0rwnfcnax" path="res://levels/rand/15.tscn" id="18_mpe1f"]
+[ext_resource type="PackedScene" uid="uid://dcbnac3k5c2bh" path="res://levels/rand/16.tscn" id="19_ko67h"]
+[ext_resource type="PackedScene" uid="uid://pk206siyyege" path="res://levels/rand/17.tscn" id="20_f85eu"]
+[ext_resource type="PackedScene" uid="uid://dbcrx23xsfrlp" path="res://levels/rand/18.tscn" id="21_rvdjm"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -39,30 +36,13 @@ layer_0/tile_data = PackedInt32Array(131072, 0, 1, 196608, 0, 1, 262144, 262144,
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("current_level", "player")]
 unique_name_in_owner = true
 script = ExtResource("3_yuvn4")
-levels = [ExtResource("4_e4ceh"), ExtResource("5_vqiwr"), ExtResource("6_v5xvb"), ExtResource("7_rihcm"), ExtResource("8_5a36k"), ExtResource("9_3vmkv"), ExtResource("10_7n0bw"), ExtResource("11_skonw"), ExtResource("12_5n213"), ExtResource("13_ni5ug"), ExtResource("14_uubx2"), ExtResource("15_x5iyq"), ExtResource("16_xq64q"), ExtResource("17_c4kk1"), ExtResource("18_mpe1f"), ExtResource("19_ko67h"), ExtResource("20_f85eu"), ExtResource("21_rvdjm")]
 current_level = NodePath("../Start")
+start = ExtResource("2_vg2cv")
 player = NodePath("../player")
+levels = [ExtResource("4_e4ceh"), ExtResource("5_vqiwr"), ExtResource("6_v5xvb"), ExtResource("7_rihcm"), ExtResource("8_5a36k"), ExtResource("9_3vmkv"), ExtResource("10_7n0bw"), ExtResource("11_skonw"), ExtResource("12_5n213"), ExtResource("13_ni5ug"), ExtResource("14_uubx2"), ExtResource("15_x5iyq"), ExtResource("16_xq64q"), ExtResource("17_c4kk1"), ExtResource("18_mpe1f"), ExtResource("19_ko67h"), ExtResource("20_f85eu"), ExtResource("21_rvdjm")]
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(128, 128)
 current = true
 zoom = Vector2(1.25, 1.25)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(164, 82)
-collision_layer = 8
-collision_mask = 11
-mass = 5.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("RectangleShape2D_htk2i")
-
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
-polygon = PackedVector2Array(-10, -10, -10, -10, 10, -10, 10, 10, -10, 10)
-
-[node name="Wrencher" parent="." instance=ExtResource("23_p2dy5")]
-position = Vector2(16, 163)
-rotation = 1.57079
-
-[connection signal="world_generated" from="LevelManager" to="." method="_on_level_manager_world_generated"]
-[connection signal="died" from="Wrencher" to="Wrencher" method="die"]
+position_smoothing_enabled = true

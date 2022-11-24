@@ -28,7 +28,7 @@ extends Line2D
 ## Optional path to the target node to follow. If not set, the instance follows its parent.
 @onready @export var target: Node2D
 
-var _points_creation_time := []
+var _points_creation_time: PackedFloat32Array = []
 var _last_point := Vector2.ZERO
 var _clock := 0.0
 
@@ -70,13 +70,13 @@ func add_timed_point(point: Vector2, time: float) -> void:
 func remove_first_point() -> void:
     if get_point_count() > 1:
         remove_point(0)
-    _points_creation_time.pop_front()
+    _points_creation_time.remove_at(0)
 
 
 ## Remove points older than [code]lifetime[/code].
 func remove_older() -> void:
     for creation_time in _points_creation_time:
-        var delta = _clock - creation_time
+        var delta := _clock - creation_time
         if delta > lifetime:
             remove_first_point()
         # Points in `_points_creation_time` are ordered from oldest to newest so as soon as a point

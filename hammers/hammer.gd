@@ -28,7 +28,8 @@ var hit_player := true
 ## To hit the enemys
 var hit_enemys := false
 
-@onready var trail: Trail2D = $Trail2D
+@onready var trail := $Trail as Trail2D
+@onready var outline_shader := ($Sprite as Sprite2D).material as ShaderMaterial
 
 func _ready() -> void:
   set_collision_mask_value(3, hit_player)
@@ -38,11 +39,15 @@ func seek() -> void:
   if target:
     direction = direction + (global_position.direction_to(target.global_position) - direction) * steer_force
 
+func highlight() -> void:
+  outline_shader.set_shader_parameter(&"line_width", .75)
+
+func unhighlight() -> void:
+  outline_shader.set_shader_parameter(&"line_width", 0)
 
 func _physics_process(delta: float) -> void:
   seek()
   velocity = (direction * acceleration * delta).limit_length(top_speed)
-  print(velocity)
   rotation = velocity.angle() + PI/2 # face forward
   global_position += velocity
 

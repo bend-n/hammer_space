@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://6o1bfy3xhjbm"]
+[gd_scene format=3 uid="uid://smkugd4xx0vm"]
 
 [node name="Effect" type="Node2D"]
 texture_filter = 1

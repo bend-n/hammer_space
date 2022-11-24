@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbrnw5j2j8wax"]
+[gd_scene load_steps=4 format=3 uid="uid://bkjo2fpkalawa"]
 
 [ext_resource type="Texture2D" uid="uid://b0iehyccoav1r" path="res://assets/world/one_way_platform.png" id="1_3fm0l"]
 [ext_resource type="Script" path="res://world/one_way_platform.gd" id="1_3rdiq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8my0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3f1j"]
 size = Vector2(34, 3)
 
 [node name="one_way_platform" type="StaticBody2D" node_paths=PackedStringArray("shape")]
@@ -16,5 +16,5 @@ texture = ExtResource("1_3fm0l")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_x8my0")
+shape = SubResource("RectangleShape2D_a3f1j")
 one_way_collision = true

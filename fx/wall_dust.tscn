@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://batisas75bpt0"]
+[gd_scene load_steps=6 format=3 uid="uid://bdutc7drtweyc"]
 
-[ext_resource type="PackedScene" uid="uid://6o1bfy3xhjbm" path="res://fx/fx.tscn" id="1_4c41e"]
+[ext_resource type="PackedScene" uid="uid://smkugd4xx0vm" path="res://fx/fx.tscn" id="1_4c41e"]
 [ext_resource type="Texture2D" uid="uid://cky7hbmx1auqh" path="res://assets/fx/wall_dust.png" id="2_inful"]
 
-[sub_resource type="Animation" id="1"]
+[sub_resource type="Animation" id="Animation_eq683"]
 resource_name = "Animate"
 length = 0.5
 tracks/0/type = "value"
@@ -33,7 +33,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_s2jmf"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -48,10 +48,10 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct4ki"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e1m4r"]
 _data = {
-"Animate": SubResource("1"),
-"RESET": SubResource("2")
+"Animate": SubResource("Animation_eq683"),
+"RESET": SubResource("Animation_s2jmf")
 }
 
 [node name="WallDustEffect" instance=ExtResource("1_4c41e")]
@@ -64,5 +64,5 @@ frame = 1
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Animate"
 libraries = {
-"": SubResource("AnimationLibrary_ct4ki")
+"": SubResource("AnimationLibrary_e1m4r")
 }

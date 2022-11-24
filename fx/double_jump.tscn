@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://clsdwiyvr2dmc"]
+[gd_scene load_steps=6 format=3 uid="uid://dn2ai1wwutqe5"]
 
-[ext_resource type="PackedScene" uid="uid://6o1bfy3xhjbm" path="res://fx/fx.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://smkugd4xx0vm" path="res://fx/fx.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://byl1w287mywe" path="res://assets/fx/double_jump.png" id="2"]
 
-[sub_resource type="Animation" id="1"]
+[sub_resource type="Animation" id="Animation_enwu3"]
 resource_name = "Animate"
 length = 0.5
 tracks/0/type = "value"
@@ -33,7 +33,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_ugiqs"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -48,10 +48,10 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xbme"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfi4e"]
 _data = {
-"Animate": SubResource("1"),
-"RESET": SubResource("2")
+"Animate": SubResource("Animation_enwu3"),
+"RESET": SubResource("Animation_ugiqs")
 }
 
 [node name="DoubleJumpEffect" instance=ExtResource("1")]
@@ -64,5 +64,5 @@ frame = 1
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Animate"
 libraries = {
-"": SubResource("AnimationLibrary_8xbme")
+"": SubResource("AnimationLibrary_sfi4e")
 }
