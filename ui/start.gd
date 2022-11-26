@@ -1,10 +1,7 @@
-extends Control
-
-@export var focus: Control
+extends Popuppable
 
 func _ready() -> void:
-  focus.grab_focus()
+  open()
 
-
-func _on_cfg_close() -> void:
-  focus.grab_focus()
+func exit() -> void:
+  pass

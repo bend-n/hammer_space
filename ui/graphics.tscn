@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvka0056uk3q4"]
+
+[ext_resource type="Theme" uid="uid://b5sr8elfovyw3" path="res://ui/main.theme.tres" id="1_be2xy"]
+[ext_resource type="StyleBox" uid="uid://dfisjyikb066o" path="res://ui/darkener_panel_bottom.tres" id="2_g8edo"]
+[ext_resource type="Script" path="res://ui/graphics.gd" id="2_s8nd1"]
+[ext_resource type="StyleBox" uid="uid://bt4oraf4hpx7b" path="res://ui/darkener_panel_top.tres" id="3_pgqel"]
+[ext_resource type="PackedScene" uid="uid://b7b1oujujfumh" path="res://ui/exitbutton.tscn" id="5_082rc"]
+[ext_resource type="PackedScene" uid="uid://bcgfik2femipi" path="res://ui/components/caretoptionbutton/caretoptionbutton.tscn" id="5_kv1ys"]
+
+[node name="graphics" type="MarginContainer" node_paths=PackedStringArray("focus")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_be2xy")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("2_s8nd1")
+focus = NodePath("Panel2/V/h/vsyncbutton")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 310.0
+theme_override_styles/panel = ExtResource("2_g8edo")
+
+[node name="Panel2" type="PanelContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 310.0
+theme_override_styles/panel = ExtResource("3_pgqel")
+
+[node name="V" type="VBoxContainer" parent="Panel2"]
+show_behind_parent = true
+layout_mode = 2
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 285.0
+offset_bottom = 285.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h" type="HBoxContainer" parent="Panel2/V"]
+layout_mode = 2
+offset_right = 270.0
+offset_bottom = 43.0
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="vsyncbutton" type="CheckBox" parent="Panel2/V/h"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 77.0
+offset_right = 188.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../exit")
+focus_neighbor_top = NodePath("../../windowbutton/button")
+focus_neighbor_right = NodePath("../exit")
+focus_neighbor_bottom = NodePath("../../windowbutton/button")
+text = "vsync"
+
+[node name="exit" parent="Panel2/V/h" instance=ExtResource("5_082rc")]
+layout_mode = 2
+offset_left = 238.0
+offset_right = 270.0
+offset_bottom = 43.0
+focus_neighbor_left = NodePath("../vsyncbutton")
+focus_neighbor_top = NodePath("../../windowbutton/button")
+focus_neighbor_right = NodePath("../vsyncbutton")
+focus_neighbor_bottom = NodePath("../../windowbutton/button")
+
+[node name="windowbutton" parent="Panel2/V" instance=ExtResource("5_kv1ys")]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 50.0
+offset_top = 47.0
+offset_right = 220.0
+offset_bottom = 90.0
+size_flags_horizontal = 4
+options = PackedStringArray("fullscreen", "borderless fs", "windowed")
+current_option = 2
+
+[node name="leftcaret" parent="Panel2/V/windowbutton" index="0"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../h/vsyncbutton")
+focus_neighbor_bottom = NodePath("../../h/vsyncbutton")
+
+[node name="button" parent="Panel2/V/windowbutton" index="1"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../h/vsyncbutton")
+focus_neighbor_bottom = NodePath("../../h/vsyncbutton")
+
+[node name="rightcaret" parent="Panel2/V/windowbutton" index="2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../h/vsyncbutton")
+focus_neighbor_bottom = NodePath("../../h/vsyncbutton")
+
+[connection signal="toggled" from="Panel2/V/h/vsyncbutton" to="." method="_on_vsync_toggled"]
+[connection signal="pressed" from="Panel2/V/h/exit" to="." method="exit"]
+[connection signal="changed" from="Panel2/V/windowbutton" to="." method="_on_window_mode_changed"]
+
+[editable path="Panel2/V/windowbutton"]

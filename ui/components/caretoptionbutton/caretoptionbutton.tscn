@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcgfik2femipi"]
+
+[ext_resource type="Theme" uid="uid://b5sr8elfovyw3" path="res://ui/main.theme.tres" id="1_ccknv"]
+[ext_resource type="Script" path="res://ui/components/caretoptionbutton/caretoptionbutton.gd" id="2_e0ttn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fctpt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8pewa"]
+
+[node name="<OptionButton>" type="HBoxContainer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 194.0
+offset_bottom = 41.0
+mouse_filter = 2
+theme = ExtResource("1_ccknv")
+script = ExtResource("2_e0ttn")
+
+[node name="leftcaret" type="Button" parent="."]
+material = SubResource("ShaderMaterial_fctpt")
+offset_right = 13.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(1, 0.345098, 0.278431, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.690196, 0.639216, 1)
+theme_override_colors/font_focus_color = Color(1, 0.647059, 0.596078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.968627, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8pewa")
+text = "<"
+
+[node name="button" type="Button" parent="."]
+offset_left = 17.0
+offset_right = 153.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "fullscreen"
+
+[node name="rightcaret" type="Button" parent="."]
+material = SubResource("ShaderMaterial_fctpt")
+offset_left = 157.0
+offset_right = 170.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(1, 0.345098, 0.278431, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.690196, 0.639216, 1)
+theme_override_colors/font_focus_color = Color(1, 0.647059, 0.596078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.968627, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8pewa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8pewa")
+text = ">"
+
+[connection signal="pressed" from="leftcaret" to="." method="sub"]
+[connection signal="pressed" from="button" to="." method="add"]
+[connection signal="pressed" from="rightcaret" to="." method="add"]

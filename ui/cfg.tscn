@@ -1,84 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0u64ju7url7g"]
+[gd_scene load_steps=5 format=3 uid="uid://c0u64ju7url7g"]
 
 [ext_resource type="Theme" uid="uid://b5sr8elfovyw3" path="res://ui/main.theme.tres" id="1_14aww"]
-[ext_resource type="Script" path="res://addons/remap/RemapButton.gd" id="1_c3nk4"]
-[ext_resource type="Script" path="res://ui/cfg.gd" id="2_3rpdm"]
-[ext_resource type="FontFile" uid="uid://ck4uai24afp11" path="res://addons/remap/PromptFont.ttf" id="3_g7yde"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n07ao"]
-bg_color = Color(0, 0.0784314, 0.168627, 0.615686)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nd1ad"]
-content_margin_left = 15.0
-content_margin_top = 15.0
-content_margin_right = 15.0
-content_margin_bottom = 15.0
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="GDScript" id="GDScript_gnxo1"]
-resource_name = "holder"
-script/source = "extends VBoxContainer
-
-@export var font_size: int
-
-func _ready() -> void:
-  for c in get_children():
-    if c.name == \"bbar\":
-      continue
-    c.button.add_theme_font_size_override(\"font_size\", font_size)
-"
-
-[sub_resource type="GDScript" id="GDScript_dodrb"]
-resource_name = "reset"
-script/source = "extends Button
-
-func _pressed() -> void:
-  InputMap.load_from_project_settings()
-"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7ea5"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.427451, 0.117647, 0.156863, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.658824, 0.129412, 0.294118, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_it6gr"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.513726, 0.117647, 0.156863, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.92549, 0.345098, 0.278431, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="Script" path="res://ui/popup.gd" id="2_l8wlj"]
+[ext_resource type="PackedScene" uid="uid://ds7n3sd3bfnu8" path="res://ui/keybinds.tscn" id="3_7eok8"]
+[ext_resource type="PackedScene" uid="uid://bvka0056uk3q4" path="res://ui/graphics.tscn" id="4_rtxkf"]
 
 [node name="cfg" type="ColorRect" node_paths=PackedStringArray("focus")]
 anchors_preset = 15
@@ -87,186 +12,56 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_14aww")
-color = Color(0, 0, 0, 0.192157)
-script = ExtResource("2_3rpdm")
-focus = NodePath("margin/Scroll/V/left")
+color = Color(0, 0, 0, 0.596078)
+script = ExtResource("2_l8wlj")
+focus = NodePath("V/graphics")
 
-[node name="margin" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="V" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -76.0
+offset_right = 70.0
+offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+alignment = 1
 
-[node name="Panel" type="Panel" parent="margin"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 310.0
-offset_bottom = 310.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_n07ao")
+[node name="graphics" type="Button" parent="V"]
+offset_top = 7.0
+offset_right = 140.0
+offset_bottom = 50.0
+focus_neighbor_top = NodePath("../back")
+focus_neighbor_bottom = NodePath("../keybinds")
+text = "graphics"
 
-[node name="Scroll" type="ScrollContainer" parent="margin"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 310.0
-offset_bottom = 310.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nd1ad")
-follow_focus = true
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
+[node name="keybinds" type="Button" parent="V"]
+offset_top = 54.0
+offset_right = 140.0
+offset_bottom = 97.0
+focus_neighbor_top = NodePath("../graphics")
+focus_neighbor_bottom = NodePath("../back")
+text = "controls"
 
-[node name="V" type="VBoxContainer" parent="margin/Scroll"]
-show_behind_parent = true
-layout_mode = 2
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 285.0
-offset_bottom = 285.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = SubResource("GDScript_gnxo1")
-font_size = 15
+[node name="back" type="Button" parent="V"]
+offset_top = 101.0
+offset_right = 140.0
+offset_bottom = 144.0
+focus_neighbor_top = NodePath("../keybinds")
+focus_neighbor_bottom = NodePath("../graphics")
+text = "back"
 
-[node name="bbar" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 36.0
+[node name="keybinds" parent="." instance=ExtResource("3_7eok8")]
+visible = false
 
-[node name="space3" type="Control" parent="margin/Scroll/V/bbar"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-anchors_preset = 0
-offset_right = 20.0
-offset_bottom = 36.0
+[node name="graphics" parent="." instance=ExtResource("4_rtxkf")]
+visible = false
 
-[node name="reset" type="Button" parent="margin/Scroll/V/bbar"]
-show_behind_parent = true
-layout_mode = 2
-offset_left = 24.0
-offset_right = 79.0
-offset_bottom = 36.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 12
-text = "reset"
-script = SubResource("GDScript_dodrb")
-
-[node name="space" type="Control" parent="margin/Scroll/V/bbar"]
-layout_mode = 2
-anchors_preset = 0
-offset_left = 83.0
-offset_right = 190.0
-offset_bottom = 36.0
-size_flags_horizontal = 3
-
-[node name="exit" type="Button" parent="margin/Scroll/V/bbar"]
-show_behind_parent = true
-layout_mode = 2
-offset_left = 194.0
-offset_right = 226.0
-offset_bottom = 36.0
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("3_g7yde")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_t7ea5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_it6gr")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_it6gr")
-theme_override_styles/focus = SubResource("StyleBoxFlat_it6gr")
-text = "✗"
-
-[node name="space2" type="Control" parent="margin/Scroll/V/bbar"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 230.0
-offset_right = 270.0
-offset_bottom = 36.0
-
-[node name="left" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-offset_top = 40.0
-offset_right = 270.0
-offset_bottom = 82.0
-script = ExtResource("1_c3nk4")
-prompt_text = "push button"
-_name = "left"
-action = "left"
-icon_size = Vector2(35, 35)
-font_size = 19
-continuous_updating = true
-
-[node name="right" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-offset_top = 86.0
-offset_right = 270.0
-offset_bottom = 128.0
-script = ExtResource("1_c3nk4")
-prompt_text = "push button"
-_name = "right"
-action = "right"
-icon_size = Vector2(35, 35)
-font_size = 19
-continuous_updating = true
-
-[node name="up" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-offset_top = 132.0
-offset_right = 270.0
-offset_bottom = 174.0
-script = ExtResource("1_c3nk4")
-prompt_text = "push button"
-_name = "jump"
-action = "jump"
-icon_size = Vector2(35, 35)
-font_size = 19
-continuous_updating = true
-
-[node name="down" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-offset_top = 178.0
-offset_right = 270.0
-offset_bottom = 220.0
-script = ExtResource("1_c3nk4")
-prompt_text = "push button"
-_name = "fall"
-action = "down"
-icon_size = Vector2(35, 35)
-font_size = 19
-continuous_updating = true
-
-[node name="shoot" type="HBoxContainer" parent="margin/Scroll/V"]
-show_behind_parent = true
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-offset_top = 224.0
-offset_right = 270.0
-offset_bottom = 266.0
-script = ExtResource("1_c3nk4")
-prompt_text = "push button"
-_name = "shoot"
-action = "shoot"
-icon_size = Vector2(35, 35)
-font_size = 19
-continuous_updating = true
-
-[connection signal="pressed" from="margin/Scroll/V/bbar/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="V/graphics" to="graphics" method="open"]
+[connection signal="pressed" from="V/keybinds" to="keybinds" method="open"]
+[connection signal="pressed" from="V/back" to="." method="exit"]
+[connection signal="close" from="keybinds" to="." method="open"]
+[connection signal="close" from="graphics" to="." method="open"]

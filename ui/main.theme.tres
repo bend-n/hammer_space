@@ -1,16 +1,18 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b5sr8elfovyw3"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://b5sr8elfovyw3"]
 
 [ext_resource type="StyleBox" uid="uid://caxtg2fj6ffqx" path="res://ui/button/button_focus.tres" id="1_8x0ae"]
 [ext_resource type="StyleBox" uid="uid://483vjasgeg6x" path="res://ui/button/button_normal.tres" id="1_e241j"]
 [ext_resource type="StyleBox" uid="uid://cuwclicw8mxmg" path="res://ui/button/button_disabled.tres" id="1_kdwa2"]
 [ext_resource type="StyleBox" uid="uid://5c652jqp6x8q" path="res://ui/button/button_hover.tres" id="3_kg542"]
 [ext_resource type="StyleBox" uid="uid://kccji4f3l86p" path="res://ui/button/button_pressed.tres" id="5_fceyb"]
-[ext_resource type="FontFile" uid="uid://w8xa1kya7ls5" path="res://assets/ui/04B_19.ttf" id="6_ibow1"]
+[ext_resource type="Texture2D" uid="uid://bkajml7tkyfcl" path="res://assets/ui/boxchecked.png" id="6_4s2vy"]
+[ext_resource type="FontFile" uid="uid://b71ec3fvrtl4w" path="res://assets/ui/04B_19.ttf" id="6_ibow1"]
 [ext_resource type="StyleBox" uid="uid://c7plpsmtwl2tj" path="res://ui/panel.tres" id="6_s8neq"]
+[ext_resource type="Texture2D" uid="uid://d00nnr4kk16bd" path="res://assets/ui/boxunchecked.png" id="7_4dnid"]
 
 [resource]
 default_font = ExtResource("6_ibow1")
-default_font_size = 28
+default_font_size = 22
 Button/colors/font_color = Color(0.933333, 0.909804, 0.835294, 1)
 Button/colors/font_disabled_color = Color(0.513726, 0.580392, 0.588235, 1)
 Button/colors/font_focus_color = Color(0.992157, 0.964706, 0.890196, 1)
@@ -18,10 +20,12 @@ Button/colors/font_hover_color = Color(0.992157, 0.964706, 0.890196, 1)
 Button/colors/font_hover_pressed_color = Color(0.992157, 0.964706, 0.890196, 1)
 Button/colors/font_outline_color = Color(0.992157, 0.964706, 0.890196, 1)
 Button/colors/font_pressed_color = Color(0.992157, 0.964706, 0.890196, 1)
-Button/font_sizes/font_size = 28
+Button/font_sizes/font_size = 22
 Button/styles/disabled = ExtResource("1_kdwa2")
 Button/styles/focus = ExtResource("1_8x0ae")
 Button/styles/hover = ExtResource("3_kg542")
 Button/styles/normal = ExtResource("1_e241j")
 Button/styles/pressed = ExtResource("5_fceyb")
+CheckBox/icons/checked = ExtResource("6_4s2vy")
+CheckBox/icons/unchecked = ExtResource("7_4dnid")
 PanelContainer/styles/panel = ExtResource("6_s8neq")
