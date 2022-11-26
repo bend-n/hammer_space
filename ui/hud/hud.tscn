@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnsgjilr4mn10"]
+
+[ext_resource type="Texture2D" uid="uid://3dgefswp61jy" path="res://assets/ui/health.png" id="1_8qpc0"]
+[ext_resource type="Script" path="res://ui/hud/health_meter.gd" id="1_yn38u"]
+[ext_resource type="Texture2D" uid="uid://tpy1gjydytic" path="res://assets/ui/health_empty.png" id="2_pqvic"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HealthMeter" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 11.0
+offset_top = 8.0
+offset_right = 27.0
+offset_bottom = 22.0
+script = ExtResource("1_yn38u")
+
+[node name="Empty" type="TextureRect" parent="HealthMeter"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 12.0
+texture = ExtResource("2_pqvic")
+stretch_mode = 1
+
+[node name="Full" type="TextureRect" parent="HealthMeter"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 12.0
+texture = ExtResource("1_8qpc0")
+stretch_mode = 1

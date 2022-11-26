@@ -6,26 +6,31 @@ const JumpEffect := preload("res://fx/jump.tscn")
 const DoubleJumpEffect := preload("res://fx/double_jump.tscn")
 const WallJumpEffect := preload("res://fx/wall_dust.tscn")
 
+signal hp_changed(health: int)
+
 ## Accel
-@export var ACCELERATION := 512
+@export var accel := 512
 
 ## Topspeed
-@export var MAX_SPEED := 64
+@export var top_speed := 64
 
 ## Jump force
-@export var JUMP_FORCE := 150
+@export var jump_force := 150
 
 ## The topspeed at which we slide down the wall
-@export var MAX_WALL_SLIDE_SPEED := 110
+@export var max_wall_slide_fall_speed := 110
 
 ## The standard speed at which we slide down the wall
-@export var WALL_SLIDE_SPEED := 42
+@export var wall_slide_fall_speed := 42
 
 ## Friction
-@export var FRICTION := 0.25
+@export var frict := 0.25
 
 ## How much less movement control to have in the air
-@export var AIR_MOVEMENT_MODIFIER := 0.95
+@export var air_movement_modifier := 0.95
+
+## Max hp
+@export var max_health := 3
 
 @onready var sprite := $Sprite as Sprite2D
 @onready var anims := $Player as AnimationPlayer
@@ -54,6 +59,14 @@ var state := State.MOVE
 var just_jumped := false
 
 var has_hammer := false
+
+var health := max_health:
+  set(hp):
+    health = hp
+    hp_changed.emit(hp)
+    if hp == 0:
+      queue_free()
+
 
 func _physics_process(delta: float) -> void:
   just_jumped = false
@@ -94,20 +107,20 @@ func dust() -> void:
 ## Applys gravity.
 func apply_gravity(delta: float) -> void:
   velocity.y += GRAVITY * delta
-  velocity.y = minf(velocity.y, JUMP_FORCE)
+  velocity.y = minf(velocity.y, jump_force)
 
 ## Applys force with the [param input] of the player.
 func apply_force(input: float, delta: float) -> void:
   if input != 0:
-    velocity.x += input * ACCELERATION * delta
-    velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
+    velocity.x += input * accel * delta
+    velocity.x = clampf(velocity.x, -top_speed, top_speed)
     if not is_on_floor():
-      velocity.x *= AIR_MOVEMENT_MODIFIER
+      velocity.x *= air_movement_modifier
 
 ## Applys friction to the player.
 func apply_friction(input: float) -> void:
   if input == 0 and not is_zero_approx(velocity.x) and is_on_floor():
-    velocity.x = lerpf(velocity.x, 0, FRICTION)
+    velocity.x = lerpf(velocity.x, 0, frict)
 
 ## Plays animations for the move state.
 func animate() -> void:
@@ -134,15 +147,15 @@ func play(anim: StringName, speed: float = 1.0) -> void:
 func jump_check() -> void:
   var want2jump := Input.is_action_just_pressed(&"jump")
   if want2jump and (is_on_floor() or coyote.time_left > 0):
-    jump(JUMP_FORCE)
+    jump(jump_force)
     just_jumped = true
   else:
-    if want2jump and velocity.y < -JUMP_FORCE / 2:
-      velocity.y = -JUMP_FORCE / 2
+    if want2jump and velocity.y < -jump_force / 2:
+      velocity.y = -jump_force / 2
 
     if want2jump and double_jump == true:
+      jump(jump_force * .75)
       double_jump = false
-      jump(JUMP_FORCE * .75)
 
 ## Jumps with [param force] force.
 func jump(force: float) -> void:
@@ -189,8 +202,8 @@ func get_wall_axis() -> int:
 ## Checks if we should jump off the [param wall_axis].
 func wall_slide_jump_check(wall_axis: int) -> void:
   if Input.is_action_just_pressed("jump"):
-    velocity.x = wall_axis * MAX_SPEED
-    velocity.y = -JUMP_FORCE / 1.25
+    velocity.x = wall_axis * top_speed
+    velocity.y = -jump_force / 1.25
     state = State.MOVE
     wall_dust(wall_axis)
     # SoundFx.play("Jump", -20)
@@ -204,20 +217,20 @@ func wall_dust(wall_axis: int) -> void:
 
 ## Slides down the wall.
 func wall_slide_drop(delta: float) -> void:
-  var max_slide_speed := WALL_SLIDE_SPEED
+  var max_slide_speed := wall_slide_fall_speed
   if Input.is_action_pressed("down"):
-    max_slide_speed = MAX_WALL_SLIDE_SPEED
+    max_slide_speed = max_wall_slide_fall_speed
   velocity.y = min(velocity.y + GRAVITY * delta, max_slide_speed)
 
 ## Checks if we should detatch from the wall.
 func wall_detatch(wall_axis: int, delta: float) -> void:
   var detached := false
   if Input.is_action_just_pressed("right"):
-    velocity.x = ACCELERATION * delta
+    velocity.x = accel * delta
     detached = true
 
   if Input.is_action_just_pressed("left"):
-    velocity.x = -ACCELERATION * delta
+    velocity.x = -accel * delta
     detached = true
 
   if detached:
@@ -226,3 +239,7 @@ func wall_detatch(wall_axis: int, delta: float) -> void:
 
   if wall_axis == 0 or is_on_floor():
     state = State.MOVE
+
+
+func hit(damage: int) -> void:
+  health -= damage

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dcaws2iac7w3y"]
+[gd_scene load_steps=24 format=3 uid="uid://06slp4crd6oj"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_l4fqe"]
 [ext_resource type="PackedScene" uid="uid://umj2kojm6mlo" path="res://player/player.tscn" id="1_ug1uc"]
@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dcbnac3k5c2bh" path="res://levels/rand/16.tscn" id="19_ko67h"]
 [ext_resource type="PackedScene" uid="uid://pk206siyyege" path="res://levels/rand/17.tscn" id="20_f85eu"]
 [ext_resource type="PackedScene" uid="uid://dbcrx23xsfrlp" path="res://levels/rand/18.tscn" id="21_rvdjm"]
-[ext_resource type="PackedScene" uid="uid://bnsgjilr4mn10" path="res://ui/hud.tscn" id="23_5dqpk"]
+[ext_resource type="PackedScene" uid="uid://bnsgjilr4mn10" path="res://ui/hud/hud.tscn" id="23_5dqpk"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
