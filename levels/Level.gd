@@ -11,7 +11,7 @@ const OneWayPlatform_scn := preload("res://world/one_way_platform.tscn")
 const ALL_DOORS := [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 
 ## The enabled walls. [url=https://kidscancode.org/blog/img/cells_4bit.png]4bit[/url]
-@export_range(0, 15) var enabled_walls := 0
+@export_range(0, 15) var enabled_walls := 15
 
 const rot_map := {Vector2i.LEFT: PI, Vector2i.RIGHT: 0, Vector2i.DOWN: PI / 2, Vector2i.UP: -PI / 2}  # 180  # 90  # -90
 

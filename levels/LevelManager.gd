@@ -14,7 +14,7 @@ var maze: Maze = null
 var completed_levels: Array[Vector2i] = []
 
 ## Maze size
-@export var size := Vector2i(6, 6)
+@export var size := Vector2i(10, 10)
 
 ## ASSIGN TO Start.tscn
 @export var current_level: TileMap
