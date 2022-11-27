@@ -14,8 +14,8 @@ func open() -> void:
   else:
     focus.grab_focus()
 
-func _unhandled_key_input(event: InputEvent) -> void:
-  if visible and event is InputEventKey and event.keycode == KEY_ESCAPE:
+func _unhandled_input(event: InputEvent) -> void:
+  if visible and event.is_action("ui_cancel"):
     accept_event()
     exit()
 

@@ -9,22 +9,29 @@
 [node name="HealthMeter" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 11.0
-offset_top = 8.0
-offset_right = 27.0
-offset_bottom = 22.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 56.0
+offset_bottom = 17.0
 script = ExtResource("1_yn38u")
+metadata/_edit_group_ = true
 
 [node name="Empty" type="TextureRect" parent="HealthMeter"]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 12.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_pqvic")
 stretch_mode = 1
 
 [node name="Full" type="TextureRect" parent="HealthMeter"]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 12.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_8qpc0")
 stretch_mode = 1

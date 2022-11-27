@@ -30,10 +30,12 @@ signal hp_changed(health: int)
 @export var air_movement_modifier := 0.95
 
 ## Max hp
-@export var max_health := 3
+@export var max_health := 10
 
 @onready var sprite := $Sprite as Sprite2D
 @onready var anims := $Player as AnimationPlayer
+@onready var pickup_area := $PickupArea as Area2D
+@onready var aim_gizmo := $AimGizmo as AimGizmo
 
 ## The coyote jump timer.
 ## Allows you to jump after leaving the ground if the timer has not run out.
@@ -49,6 +51,9 @@ func _exit_tree() -> void:
 ## State enum.
 enum State { MOVE, WALL_SLIDE, STOP }
 
+## Aiming the hammer.
+var aiming := false
+
 ## Can we double jump now?
 var double_jump := true
 
@@ -58,7 +63,11 @@ var state := State.MOVE
 ## Have we just jumped?
 var just_jumped := false
 
-var has_hammer := false
+## The hammer we carry.
+var current_hammer: Hammer = null
+
+## The last highlit hammer.
+var last_highlit: Hammer = null
 
 var health := max_health:
   set(hp):
@@ -76,6 +85,8 @@ func _physics_process(delta: float) -> void:
       play(&"idle")
     State.MOVE:
       var input := Input.get_axis(&"left", &"right")
+      if aiming:
+        input = 0
       apply_force(input, delta)
       apply_friction(input)
 
@@ -83,7 +94,7 @@ func _physics_process(delta: float) -> void:
 
       apply_gravity(delta)
 
-      animate()
+      animate(input)
       move()
       wall_slide_check()
     State.WALL_SLIDE:
@@ -96,6 +107,10 @@ func _physics_process(delta: float) -> void:
       wall_slide_drop(delta)
       move()
       wall_detatch(wall_axis, delta)
+  check_throw()
+  hammer_highlight()
+  hammer_pickup()
+  hammer_move()
 
 ## Creates floor dust.
 func dust() -> void:
@@ -122,11 +137,44 @@ func apply_friction(input: float) -> void:
   if input == 0 and not is_zero_approx(velocity.x) and is_on_floor():
     velocity.x = lerpf(velocity.x, 0, frict)
 
+func hammer_highlight() -> void:
+  if not current_hammer:
+    var hamms := pickup_area.get_overlapping_areas()
+    if hamms.is_empty():
+      if last_highlit:
+        last_highlit.unhighlight()
+        last_highlit = null
+    elif not last_highlit in hamms:
+      if last_highlit:
+        last_highlit.unhighlight()
+      last_highlit = hamms[0]
+      hamms[0].highlight()
+
+func hammer_pickup() -> void:
+  if Input.is_action_just_pressed("pickup") and last_highlit and not current_hammer:
+    last_highlit.unhighlight()
+    current_hammer = last_highlit
+    Globals.levelmanager.current_level.remove_child(current_hammer)
+    current_hammer.position.y = -14
+    add_child(current_hammer)
+    move_child(current_hammer, 0)
+
+
+func hammer_move() -> void:
+  if current_hammer:
+    current_hammer.position.x = 6 * sprite.scale.x
+    current_hammer.rotation = 0.087 * sprite.scale.x
+
+func check_throw() -> void:
+  if current_hammer and Input.is_action_just_pressed("throw"):
+    aim_gizmo.enabled = true
+    aiming = true
+    aim_gizmo.show()
+
 ## Plays animations for the move state.
-func animate() -> void:
-  var facing: int = sign(get_local_mouse_position().x)
-  if facing != 0:
-    sprite.scale.x = facing
+func animate(input: float) -> void:
+  if sign(input) != 0:
+    sprite.scale.x = sign(input)
 
   if not is_on_floor():
     play(&"jump")
@@ -201,7 +249,7 @@ func get_wall_axis() -> int:
 
 ## Checks if we should jump off the [param wall_axis].
 func wall_slide_jump_check(wall_axis: int) -> void:
-  if Input.is_action_just_pressed("jump"):
+  if Input.is_action_just_pressed(&"jump"):
     velocity.x = wall_axis * top_speed
     velocity.y = -jump_force / 1.25
     state = State.MOVE
@@ -225,6 +273,8 @@ func wall_slide_drop(delta: float) -> void:
 ## Checks if we should detatch from the wall.
 func wall_detatch(wall_axis: int, delta: float) -> void:
   var detached := false
+  if aiming: return
+
   if Input.is_action_just_pressed("right"):
     velocity.x = accel * delta
     detached = true
@@ -240,6 +290,24 @@ func wall_detatch(wall_axis: int, delta: float) -> void:
   if wall_axis == 0 or is_on_floor():
     state = State.MOVE
 
-
 func hit(damage: int) -> void:
   health -= damage
+
+## Disable the aim gizmo.
+func disable_aim_gizmo() -> void:
+  aiming = false
+  aim_gizmo.enabled = false
+  aim_gizmo.hide()
+
+## Throws the hammer.
+func throw(rot: float) -> void:
+  rot + randf_range(-0.01, 0.01)
+  remove_child(current_hammer)
+  current_hammer.position.x = 0 # center
+  current_hammer.global_position = to_global(current_hammer.position)
+  Globals.levelmanager.current_level.add_child(current_hammer)
+  current_hammer.hit_player = false
+  current_hammer.hit_enemys = true
+  current_hammer.throw(Vector2.from_angle(rot))
+  current_hammer = null
+  disable_aim_gizmo()

@@ -5,13 +5,13 @@ extends Line2D
 @icon("./trail2d_icon.svg")
 
 ## Enable or disable the trail
-@export var is_emitting := false:
-    set(emitting):
-        is_emitting = emitting
+@export var emitting := true:
+    set(p_emitting):
+        emitting = p_emitting
         if not is_inside_tree():
             await ready
 
-        if is_emitting:
+        if emitting:
             clear_points()
             _points_creation_time.clear()
             _last_point = to_local(target.global_position)
@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
     _clock += delta
     remove_older()
 
-    if not is_emitting:
+    if not emitting:
         return
 
     # Adding new points if necessary.

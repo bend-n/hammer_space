@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsu0i18fxrwhj"]
+[gd_scene load_steps=5 format=3 uid="uid://bsu0i18fxrwhj"]
 
 [ext_resource type="PackedScene" uid="uid://bimmd1hcj2h0e" path="res://hammers/hammer_base.tscn" id="1_350hj"]
+[ext_resource type="Shader" path="res://hammers/hammer_outline.gdshader" id="2_le3ds"]
 [ext_resource type="Texture2D" uid="uid://dcf5es758pw1n" path="res://assets/hammers/hammer01.png" id="2_sdlv5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jbfp"]
+resource_local_to_scene = true
+shader = ExtResource("2_le3ds")
+shader_parameter/light_offset = 1.0
+shader_parameter/line_width = 0.0
+shader_parameter/sin_frequency = 0.25
 
 [node name="Hammer01" instance=ExtResource("1_350hj")]
 
 [node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_7jbfp")
 texture = ExtResource("2_sdlv5")
 
 [editable path="Hitbox"]

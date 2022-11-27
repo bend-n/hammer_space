@@ -50,7 +50,6 @@ script = ExtResource("1_f036x")
 focus = NodePath("Scroll/V/left")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
@@ -59,7 +58,6 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_wrc13")
 
 [node name="Scroll" type="ScrollContainer" parent="."]
-layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
@@ -73,11 +71,10 @@ vertical_scroll_mode = 3
 
 [node name="V" type="VBoxContainer" parent="Scroll"]
 show_behind_parent = true
-layout_mode = 2
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 285.0
-offset_bottom = 285.0
+offset_bottom = 419.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -87,20 +84,18 @@ font_size = 15
 
 [node name="bbar" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
-layout_mode = 2
 offset_right = 270.0
 offset_bottom = 36.0
 
 [node name="space3" type="Control" parent="Scroll/V/bbar"]
 custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_right = 20.0
 offset_bottom = 36.0
 
 [node name="reset" type="Button" parent="Scroll/V/bbar"]
 show_behind_parent = true
-layout_mode = 2
 offset_left = 24.0
 offset_right = 79.0
 offset_bottom = 36.0
@@ -112,7 +107,7 @@ text = "reset"
 script = SubResource("GDScript_dodrb")
 
 [node name="space" type="Control" parent="Scroll/V/bbar"]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 83.0
 offset_right = 190.0
@@ -120,13 +115,12 @@ offset_bottom = 36.0
 size_flags_horizontal = 3
 
 [node name="exit" parent="Scroll/V/bbar" instance=ExtResource("5_w2is5")]
-layout_mode = 2
 focus_neighbor_left = NodePath("../reset")
 focus_neighbor_right = NodePath("../reset")
 
 [node name="space2" type="Control" parent="Scroll/V/bbar"]
 custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 230.0
 offset_right = 270.0
@@ -135,7 +129,6 @@ offset_bottom = 36.0
 [node name="left" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 40.0
 offset_right = 270.0
 offset_bottom = 82.0
@@ -143,11 +136,11 @@ script = ExtResource("6_s2rfm")
 prompt_text = "[push button]"
 _name = "left"
 action = "left"
+icon_size = Vector2(35, 35)
 
 [node name="right" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 86.0
 offset_right = 270.0
 offset_bottom = 128.0
@@ -155,42 +148,79 @@ script = ExtResource("6_s2rfm")
 prompt_text = "[push button]"
 _name = "right"
 action = "right"
+icon_size = Vector2(35, 35)
 
 [node name="up" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 132.0
 offset_right = 270.0
 offset_bottom = 174.0
 script = ExtResource("6_s2rfm")
 prompt_text = "[push button]"
-_name = "jump"
-action = "jump"
+_name = "up"
+action = "up"
+icon_size = Vector2(35, 35)
 
 [node name="down" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 178.0
 offset_right = 270.0
 offset_bottom = 220.0
 script = ExtResource("6_s2rfm")
 prompt_text = "[push button]"
-_name = "fall"
+_name = "down"
 action = "down"
+icon_size = Vector2(35, 35)
 
-[node name="shoot" type="HBoxContainer" parent="Scroll/V"]
+[node name="jump" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 224.0
 offset_right = 270.0
 offset_bottom = 266.0
 script = ExtResource("6_s2rfm")
 prompt_text = "[push button]"
-_name = "shoot"
-action = "shoot"
+_name = "jump"
+action = "jump"
+icon_size = Vector2(35, 35)
+
+[node name="fall" type="HBoxContainer" parent="Scroll/V"]
+show_behind_parent = true
+custom_minimum_size = Vector2(42, 42)
+offset_top = 270.0
+offset_right = 270.0
+offset_bottom = 312.0
+script = ExtResource("6_s2rfm")
+prompt_text = "[push button]"
+_name = "fall"
+action = "fall"
+icon_size = Vector2(35, 35)
+
+[node name="throw" type="HBoxContainer" parent="Scroll/V"]
+show_behind_parent = true
+custom_minimum_size = Vector2(42, 42)
+offset_top = 316.0
+offset_right = 270.0
+offset_bottom = 358.0
+script = ExtResource("6_s2rfm")
+prompt_text = "[push button]"
+_name = "throw"
+action = "throw"
+icon_size = Vector2(35, 35)
+
+[node name="pickup" type="HBoxContainer" parent="Scroll/V"]
+show_behind_parent = true
+custom_minimum_size = Vector2(42, 42)
+offset_top = 362.0
+offset_right = 270.0
+offset_bottom = 404.0
+script = ExtResource("6_s2rfm")
+prompt_text = "[push button]"
+_name = "grab"
+action = "pickup"
+icon_size = Vector2(35, 35)
 
 [connection signal="pressed" from="Scroll/V/bbar/reset" to="Scroll/V" method="_on_reset_pressed"]
 [connection signal="pressed" from="Scroll/V/bbar/exit" to="." method="exit"]

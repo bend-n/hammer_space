@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://06slp4crd6oj"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_l4fqe"]
-[ext_resource type="PackedScene" uid="uid://umj2kojm6mlo" path="res://player/player.tscn" id="1_ug1uc"]
+[ext_resource type="PackedScene" uid="uid://cl03k3yc8fxkt" path="res://player/player.tscn" id="1_ug1uc"]
 [ext_resource type="PackedScene" uid="uid://dqxnsdq67j23x" path="res://levels/Start.tscn" id="2_vg2cv"]
 [ext_resource type="Script" path="res://levels/LevelManager.gd" id="3_yuvn4"]
 [ext_resource type="PackedScene" uid="uid://bujj6au21fw2" path="res://levels/rand/01.tscn" id="4_e4ceh"]
@@ -49,3 +49,4 @@ zoom = Vector2(1.25, 1.25)
 position_smoothing_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("23_5dqpk")]
+layer = 0

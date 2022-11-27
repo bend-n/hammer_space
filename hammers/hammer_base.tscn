@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bimmd1hcj2h0e"]
+[gd_scene load_steps=10 format=3 uid="uid://bimmd1hcj2h0e"]
 
 [ext_resource type="PackedScene" uid="uid://ug40hxlkequx" path="res://colliders/hitbox.tscn" id="1_kdx5x"]
 [ext_resource type="Script" path="res://hammers/hammer.gd" id="1_xp22t"]
@@ -9,14 +9,18 @@
 [ext_resource type="Shader" path="res://hammers/hammer_outline.gdshader" id="5_iyctf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_go8fx"]
+resource_local_to_scene = true
 shader = ExtResource("5_iyctf")
 shader_parameter/light_offset = 1.0
 shader_parameter/line_width = 0.0
 shader_parameter/sin_frequency = 0.25
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jubww"]
+radius = 70.0
+
 [node name="Hammer" type="Area2D"]
 texture_filter = 1
-collision_layer = 0
+collision_layer = 32
 script = ExtResource("1_xp22t")
 
 [node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("target")]
@@ -29,7 +33,6 @@ gradient = ExtResource("5_8dqv1")
 round_precision = 4
 antialiased = true
 script = ExtResource("4_boru3")
-is_emitting = true
 lifetime = 2.0
 target = NodePath("")
 metadata/_edit_lock_ = true
@@ -47,6 +50,16 @@ visible = false
 [node name="Collision" parent="Hitbox" index="0"]
 shape = ExtResource("2_tgkvf")
 
+[node name="TargetFinder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="Collision" type="CollisionShape2D" parent="TargetFinder"]
+shape = SubResource("CircleShape2D_jubww")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="TargetFinder" to="." method="_on_target_finder_node_entered"]
+[connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_node_entered"]
 
 [editable path="Hitbox"]

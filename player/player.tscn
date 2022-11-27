@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://umj2kojm6mlo"]
+[gd_scene load_steps=13 format=3 uid="uid://cl03k3yc8fxkt"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_lnsyt"]
 [ext_resource type="Texture2D" uid="uid://b36hv0jwfmb1u" path="res://assets/player/animations.png" id="2_dgplu"]
 [ext_resource type="Shape2D" uid="uid://csesrw07xpp24" path="res://player/player_collision.tres" id="3_uoann"]
 [ext_resource type="PackedScene" uid="uid://bgt7m0j1ier74" path="res://colliders/hurtbox.tscn" id="4_yd6uo"]
 [ext_resource type="PackedScene" uid="uid://ug40hxlkequx" path="res://colliders/hitbox.tscn" id="5_wpn72"]
+[ext_resource type="PackedScene" uid="uid://bdj2ppa25ad87" path="res://ui/components/aim/aim.tscn" id="6_ok4xh"]
 
 [sub_resource type="Animation" id="Animation_sbyxw"]
 resource_name = "idle"
 length = 1.2
-loop_mode = 2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,6 +100,9 @@ _data = {
 "wall_slide": SubResource("Animation_ijk7a")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxcc3"]
+radius = 17.0
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
 floor_max_angle = 0.802851
@@ -140,6 +144,24 @@ collision_mask = 8
 [node name="Collision" parent="Hitbox" index="0"]
 position = Vector2(0, -7)
 shape = ExtResource("3_uoann")
+
+[node name="PickupArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_vxcc3")
+
+[node name="AimGizmo" parent="." instance=ExtResource("6_ok4xh")]
+visible = false
+position = Vector2(0, -8)
+enabled = false
+
+[connection signal="cancel" from="AimGizmo" to="." method="disable_aim_gizmo"]
+[connection signal="throw" from="AimGizmo" to="." method="throw"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

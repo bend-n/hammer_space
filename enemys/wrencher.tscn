@@ -77,6 +77,7 @@ _data = {
 size = Vector2(20, 50)
 
 [node name="Wrencher" node_paths=PackedStringArray("muzzle", "floorcast", "animator", "player_cast") instance=ExtResource("1_7mo8u")]
+floor_max_angle = 0.802851
 script = ExtResource("2_ydgi0")
 ACCELERATION = 3
 MAX_SPEED = 32
@@ -113,6 +114,7 @@ libraries = {
 }
 
 [node name="Muzzle" type="Marker2D" parent="." index="5"]
+visible = false
 position = Vector2(0, -6)
 
 [node name="FloorCast" type="RayCast2D" parent="." index="6"]

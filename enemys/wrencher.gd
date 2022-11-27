@@ -40,12 +40,14 @@ func _physics_process(_delta: float) -> void:
 
 
 func fire() -> void:
-  var hammer: Hammer = Utils.instance_scene_on_level(Utils.get_hammer(), muzzle.global_position)
+  var hammer: Hammer = Utils.get_hammer().instantiate()
+  hammer.global_position = muzzle.global_position
   hammer.steer_force = 0.01 # cheat
   hammer.target = Globals.player
   hammer.direction = up_direction
   bullet_timer = get_tree().create_timer(SHOT_COOLDOWN)
   player_cast.enabled = false
+  Globals.levelmanager.current_level.add_child(hammer)
 
 func brain() -> float:
   var dir := 0.0

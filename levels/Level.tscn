@@ -11,11 +11,4 @@ layer_0/tile_data = PackedInt32Array(131072, 196608, 1, 196608, 196608, 1, 26214
 script = ExtResource("1_cubc7")
 metadata/_edit_lock_ = true
 
-[node name="Blocks" type="TileMap" parent="."]
-visible = false
-tile_set = ExtResource("1_r867i")
-format = 2
-layer_0/tile_data = PackedInt32Array(458750, 0, 3, 458751, 131072, 3, 655359, 131072, 3, -131066, 196608, 0, -65530, 196608, 2, 1048582, 196608, 0, 1114118, 196608, 2, -65527, 196608, 2, 1048585, 196608, 0, 1114121, 196608, 2, 393232, 0, 3, 589840, 0, 3, 393233, 131072, 3, 589841, 131072, 3, -131063, 196608, 0, 655358, 0, 3)
-metadata/_edit_lock_ = true
-
 [node name="Enemys" type="Node2D" parent="."]

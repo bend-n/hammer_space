@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdj2ppa25ad87"]
+
+[ext_resource type="Script" path="res://ui/components/aim/aim.gd" id="1_raexs"]
+
+[sub_resource type="Curve" id="Curve_f8gls"]
+max_value = 3.0
+_data = [Vector2(0.00636943, 0), 0.0, 0.0, 0, 0, Vector2(0.0350318, 3), 104.667, -2.75696, 1, 1, Vector2(1, 0.339623), -2.75696, 0.0, 1, 0]
+point_count = 3
+
+[node name="Aim" type="Node2D" node_paths=PackedStringArray("arrow")]
+position = Vector2(26, 26)
+script = ExtResource("1_raexs")
+arrow = NodePath("Arrow")
+
+[node name="Arrow" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 20, 0)
+width_curve = SubResource("Curve_f8gls")
+end_cap_mode = 2
+round_precision = 12
+antialiased = true

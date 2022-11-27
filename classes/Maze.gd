@@ -98,11 +98,12 @@ static func tile_4b_to_wall_array(tile_4b: int) -> Array[Vector2i]:
 
 
 func erase():
-    const three_walled: Array[int] = [7, 11, 13, 14]
+    const three_walls: Array[int] = [7, 11, 13, 14]
+    const two_walls: Array[int] = [3, 5, 6, 9, 10, 12]
     # randomly remove a number of map walls.
     for x in range(_size.x):
         for y in range(_size.y):
-            if maze[y][x] in three_walled or randi() % 3 == 0:
+            if maze[y][x] in three_walls or maze[x][y] in two_walls or randi() % 3 == 0:
                 var cell := Vector2i(x, y)
                 var i := randi() % 4
                 for _i in range(4):
@@ -125,7 +126,7 @@ func erase():
                             or (n_cell.y == _size.y and n_walls & S)
                         ):
                             continue
-                        if walls in three_walled or n_walls in three_walled:
+                        if walls in three_walls or n_walls in three_walls:
                             continue
                         set_cellv(cell, walls)
                         set_cellv(n_cell, n_walls)
