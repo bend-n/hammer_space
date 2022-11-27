@@ -21,7 +21,7 @@ const S := 4
 ## The west constant.
 const W := 8
 
-## The N E S W mappings to UP RIGHT DOWN LEFTtr`1`
+## The N E S W mappings to UP RIGHT DOWN LEFT
 const cell_walls := {Vector2i.UP: N, Vector2i.RIGHT: E, Vector2i.DOWN: S, Vector2i.LEFT: W}
 const _dirs := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
