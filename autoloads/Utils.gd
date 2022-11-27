@@ -2,7 +2,7 @@ extends Node
 class_name Util
 
 static func is_in_range(val: float, start: float, end: float) -> bool:
-  return val > start and val < end
+  return val >= start and val <= end
 
 static func instance_scene(scene: PackedScene, position: Vector2, on: Node) -> Node:
   var instance := scene.instantiate() as Node2D
