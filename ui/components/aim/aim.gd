@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
     return
   if v.is_zero_approx():
     v.x = Globals.player.sprite.scale.x # default to current facing direction
-  elif Utils.is_in_range(v.y, 0.9, 1) and Util.is_in_range(v.x, -0.1, 0.1) and Globals.player.is_on_floor():
+  elif Util.is_in_range(v.y, 0.9, 1) and Util.is_in_range(v.x, -0.1, 0.1) and Globals.player.is_on_floor():
     cancel_left_time -= delta
     if cancel_left_time < 0:
       cancel_left_time = cancel_time

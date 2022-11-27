@@ -26,27 +26,9 @@ func save() -> void:
 
 func _ready() -> void:
   var lod := SaveLoad.load_file(file)
-  settings = lod if dict_cmp(lod, default_settings_data) else default_settings_data # check if the keys and vaue types are correct
+  settings = lod if Util.dict_cmp(lod, default_settings_data) else default_settings_data # check if the keys and vaue types are correct
   has_loaded = true
   update_button_visuals()
-
-static func dict_cmp(d1: Dictionary, d2: Dictionary) -> bool:
-  return (
-    len(d1) == len(d2)
-    and sort(d1.keys()) == sort(d2.keys())
-    and value_types(d1.values()) == value_types(d2.values())
-  )
-
-static func sort(arr: Array) -> Array:
-  arr.sort()
-  return arr
-
-static func value_types(arr: Array) -> Array:
-  var types = []
-  for value in arr:
-    types.append(typeof(value))
-  types.sort()
-  return types
 
 func update_button_visuals():
   ignore_set_settings = true

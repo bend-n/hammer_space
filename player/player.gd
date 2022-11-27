@@ -301,7 +301,7 @@ func disable_aim_gizmo() -> void:
 
 ## Throws the hammer.
 func throw(rot: float) -> void:
-  rot + randf_range(-0.01, 0.01)
+  rot += randf_range(-0.01, 0.01)
   remove_child(current_hammer)
   current_hammer.position.x = 0 # center
   current_hammer.global_position = to_global(current_hammer.position)

@@ -1,6 +1,24 @@
 extends Node
 class_name Util
 
+static func dict_cmp(d1: Dictionary, d2: Dictionary) -> bool:
+  return (
+    len(d1) == len(d2)
+    and sort(d1.keys()) == sort(d2.keys())
+    and value_types(d1.values()) == value_types(d2.values())
+  )
+
+static func sort(arr: Array) -> Array:
+  arr.sort()
+  return arr
+
+static func value_types(arr: Array) -> Array:
+  var types = []
+  for value in arr:
+    types.append(typeof(value))
+  types.sort()
+  return types
+
 static func is_in_range(val: float, start: float, end: float) -> bool:
   return val >= start and val <= end
 
