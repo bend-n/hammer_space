@@ -23,6 +23,7 @@ const W := 8
 
 ## The N E S W mappings to UP RIGHT DOWN LEFTtr`1`
 const cell_walls := {Vector2i.UP: N, Vector2i.RIGHT: E, Vector2i.DOWN: S, Vector2i.LEFT: W}
+const _dirs := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 ## The image representation of this maze.
 var image: Image = null:
@@ -44,7 +45,7 @@ func get_cellv(cell: Vector2i) -> int:
 ## Turns a 4b tile into a array of walls. [code]4[/code] => [code][Vector2i.DOWN][/code].
 static func tile_4b_to_wall_array(tile_4b: int) -> Array[Vector2i]:
     var array: Array[Vector2i] = []
-    for dir in cell_walls.keys():
+    for dir in _dirs:
         if tile_4b & cell_walls[dir]:
             array.append(dir)
     return array
@@ -129,7 +130,7 @@ func erase_walls() -> void:
                     i = wrapi(i + _i, 0, 3)
                     if get_cellv(cell) & cell_walls[n]:
                         var n_cell := (cell + n)
-                        if Util.out_of_bounds(n_cell, size - Vector2i.ONE):
+                        if n_cell.x > size.x - 1 or n_cell.y > size.y - 1 or n_cell.x < 0 or n_cell.y < 0:
                             continue
                         var walls: int = get_cellv(cell) - cell_walls[n]
                         var n_walls: int = get_cellv(n_cell) - cell_walls[-n]
@@ -152,16 +153,17 @@ func erase_walls() -> void:
 
 
 func _gen_image() -> void:
-    image = Image.create(size.x * 3, size.y * 3, false, Image.FORMAT_L8)
+    var img = Image.create(size.x * 3, size.y * 3, false, Image.FORMAT_L8)
     var position := Vector2i.ZERO
     for i in len(maze):
         for j in len(maze[i]):
             var paths := Maze.tile_4b_to_path_array(maze[i][j])
             if not paths.is_empty():
                 var middle := position + Vector2i.ONE
-                image.set_pixelv(middle, Color.WHITE)
+                img.set_pixelv(middle, Color.WHITE)
                 for path in paths:
-                    image.set_pixelv(middle + path, Color.WHITE)
+                    img.set_pixelv(middle + path, Color.WHITE)
             position.x += 3
         position.y += 3
         position.x = 0
+    image = img
