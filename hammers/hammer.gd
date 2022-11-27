@@ -11,31 +11,31 @@ var velocity := Vector2.ZERO
 var direction := Vector2.ZERO
 
 ## Acceleration
-@export var acceleration := 100
+@export var acceleration := 100.0
 
 ## Maximum speed
-@export var top_speed := 200
+@export var top_speed := 200.0
 
 ## The amount it can turn towards its target
 @export var steer_force = 0.05
 
-## The target
-var target: Node2D = null
-
 ## To hit the player
-var hit_player := true
+@export var hit_player := true
 
 ## To hit the enemys
-var hit_enemys := false
+@export var hit_enemys := false
 
 ## The amount of time before gravity kicks in.
-var lifetime := 1
+@export var lifetime := 1.0
 
 ## The gravity
-var grav := 4
+@export var grav := 4.0
 
 ## Terminal velocity
-var terminal_velocity := 15
+@export var terminal_velocity := 15.0
+
+## The target
+var target: Node2D = null
 
 @onready var trail := $Trail as Trail2D
 @onready var outline_shader := ($Sprite as Sprite2D).material as ShaderMaterial
