@@ -77,6 +77,7 @@ _data = {
 size = Vector2(20, 50)
 
 [node name="Wrencher" node_paths=PackedStringArray("muzzle", "floorcast", "animator", "player_cast") instance=ExtResource("1_7mo8u")]
+position = Vector2(0, -5)
 floor_max_angle = 0.802851
 script = ExtResource("2_ydgi0")
 ACCELERATION = 3
@@ -89,22 +90,25 @@ animator = NodePath("AnimationPlayer")
 player_cast = NodePath("PlayerCast")
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2(0, -8)
+position = Vector2(0, -3)
 texture = ExtResource("2_0jx2r")
 hframes = 9
 frame = 4
 
 [node name="Collision" parent="." index="1"]
-position = Vector2(0, -5)
 shape = ExtResource("3_fsg5e")
+
+[node name="Hurtbox" parent="." index="2"]
+position = Vector2(0, 5)
 
 [node name="Collision" parent="Hurtbox" index="0"]
-visible = false
 position = Vector2(0, -5)
 shape = ExtResource("3_fsg5e")
 
+[node name="Hitbox" parent="." index="3"]
+position = Vector2(0, 5)
+
 [node name="Collision" parent="Hitbox" index="0"]
-visible = false
 position = Vector2(0, -5)
 shape = ExtResource("3_fsg5e")
 
@@ -115,16 +119,16 @@ libraries = {
 
 [node name="Muzzle" type="Marker2D" parent="." index="5"]
 visible = false
-position = Vector2(0, -6)
+position = Vector2(0, -1)
 
 [node name="FloorCast" type="RayCast2D" parent="." index="6"]
 visible = false
-position = Vector2(0, -3)
+position = Vector2(0, 2)
 target_position = Vector2(0, 5)
 
 [node name="PlayerCast" type="ShapeCast2D" parent="." index="7"]
 visible = false
-position = Vector2(0, -25)
+position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_j3gtw")
 target_position = Vector2(0, -170)
 collision_mask = 3

@@ -127,6 +127,8 @@ config/features=PackedStringArray("4.0")
 Utils="*res://autoloads/Utils.gd"
 Globals="*res://autoloads/Globals.gd"
 Events="*res://autoloads/Events.gd"
+SoundManager="*res://autoloads/sound_manager.tscn"
+MusicPlayer="*res://autoloads/MusicPlayer.gd"
 
 [debug]
 

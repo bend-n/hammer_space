@@ -50,7 +50,6 @@ script = ExtResource("1_f036x")
 focus = NodePath("Scroll/V/left")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
@@ -59,7 +58,6 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_wrc13")
 
 [node name="Scroll" type="ScrollContainer" parent="."]
-layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
@@ -73,7 +71,6 @@ vertical_scroll_mode = 3
 
 [node name="V" type="VBoxContainer" parent="Scroll"]
 show_behind_parent = true
-layout_mode = 2
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 285.0
@@ -87,20 +84,18 @@ font_size = 15
 
 [node name="bbar" type="HBoxContainer" parent="Scroll/V"]
 show_behind_parent = true
-layout_mode = 2
 offset_right = 270.0
 offset_bottom = 36.0
 
 [node name="space3" type="Control" parent="Scroll/V/bbar"]
 custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_right = 20.0
 offset_bottom = 36.0
 
-[node name="reset" type="Button" parent="Scroll/V/bbar"]
+[node name="reset" type="Button" parent="Scroll/V/bbar" groups=["button"]]
 show_behind_parent = true
-layout_mode = 2
 offset_left = 24.0
 offset_right = 79.0
 offset_bottom = 36.0
@@ -112,30 +107,28 @@ text = "reset"
 script = SubResource("GDScript_dodrb")
 
 [node name="space" type="Control" parent="Scroll/V/bbar"]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 83.0
 offset_right = 190.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
 
-[node name="exit" parent="Scroll/V/bbar" instance=ExtResource("5_w2is5")]
-layout_mode = 2
+[node name="exit" parent="Scroll/V/bbar" groups=["button"] instance=ExtResource("5_w2is5")]
 focus_neighbor_left = NodePath("../reset")
 focus_neighbor_right = NodePath("../reset")
 
 [node name="space2" type="Control" parent="Scroll/V/bbar"]
 custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 230.0
 offset_right = 270.0
 offset_bottom = 36.0
 
-[node name="left" type="HBoxContainer" parent="Scroll/V"]
+[node name="left" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 40.0
 offset_right = 270.0
 offset_bottom = 82.0
@@ -147,10 +140,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="right" type="HBoxContainer" parent="Scroll/V"]
+[node name="right" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 86.0
 offset_right = 270.0
 offset_bottom = 128.0
@@ -162,10 +154,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="up" type="HBoxContainer" parent="Scroll/V"]
+[node name="up" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 132.0
 offset_right = 270.0
 offset_bottom = 174.0
@@ -177,10 +168,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="down" type="HBoxContainer" parent="Scroll/V"]
+[node name="down" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 178.0
 offset_right = 270.0
 offset_bottom = 220.0
@@ -192,10 +182,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="jump" type="HBoxContainer" parent="Scroll/V"]
+[node name="jump" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 224.0
 offset_right = 270.0
 offset_bottom = 266.0
@@ -207,10 +196,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="fall" type="HBoxContainer" parent="Scroll/V"]
+[node name="fall" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 270.0
 offset_right = 270.0
 offset_bottom = 312.0
@@ -222,10 +210,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="throw" type="HBoxContainer" parent="Scroll/V"]
+[node name="throw" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 316.0
 offset_right = 270.0
 offset_bottom = 358.0
@@ -237,10 +224,9 @@ icon_size = Vector2(35, 35)
 font_size = 22
 device = -1
 
-[node name="pickup" type="HBoxContainer" parent="Scroll/V"]
+[node name="pickup" type="HBoxContainer" parent="Scroll/V" groups=["button"]]
 show_behind_parent = true
 custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
 offset_top = 362.0
 offset_right = 270.0
 offset_bottom = 404.0

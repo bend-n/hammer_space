@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="graphics" type="Button" parent="V"]
+[node name="graphics" type="Button" parent="V" groups=["button"]]
 offset_top = 7.0
 offset_right = 140.0
 offset_bottom = 50.0
@@ -38,7 +38,7 @@ focus_neighbor_top = NodePath("../back")
 focus_neighbor_bottom = NodePath("../keybinds")
 text = "graphics"
 
-[node name="keybinds" type="Button" parent="V"]
+[node name="keybinds" type="Button" parent="V" groups=["button"]]
 offset_top = 54.0
 offset_right = 140.0
 offset_bottom = 97.0
@@ -46,7 +46,7 @@ focus_neighbor_top = NodePath("../graphics")
 focus_neighbor_bottom = NodePath("../back")
 text = "controls"
 
-[node name="back" type="Button" parent="V"]
+[node name="back" type="Button" parent="V" groups=["button"]]
 offset_top = 101.0
 offset_right = 140.0
 offset_bottom = 144.0

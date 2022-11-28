@@ -8,9 +8,9 @@ layer_0/tile_data = PackedInt32Array(131072, 196608, 1, 196608, 196608, 1, 26214
 enabled_walls = 12
 
 [node name="Wrencher" parent="Enemys" index="0" instance=ExtResource("2_dqkom")]
-position = Vector2(16, 133)
+position = Vector2(21, 133)
 rotation = -4.71238
 
 [node name="Wrencher2" parent="Enemys" index="1" instance=ExtResource("2_dqkom")]
-position = Vector2(68, 240)
+position = Vector2(68, 235)
 rotation = -6.28318

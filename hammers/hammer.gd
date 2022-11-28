@@ -14,7 +14,7 @@ var direction := Vector2.ZERO
 @export var acceleration := 100.0
 
 ## Maximum speed
-@export var top_speed := 200.0
+@export var top_speed := 3.0
 
 ## The amount it can turn towards its target
 @export var steer_force = 0.05
@@ -26,13 +26,10 @@ var direction := Vector2.ZERO
 @export var hit_enemys := false
 
 ## The amount of time before gravity kicks in.
-@export var lifetime := 1.0
+@export var lifetime := 3.0
 
 ## The gravity
 @export var grav := 4.0
-
-## Terminal velocity
-@export var terminal_velocity := 15.0
 
 ## The target
 var target: Node2D = null
@@ -42,70 +39,82 @@ var target: Node2D = null
 @onready var target_finder := $TargetFinder as Area2D
 @onready var hitbox := $Hitbox as Hitbox
 
+
 func _ready() -> void:
-  set_masks()
+	set_masks()
+
 
 ## Sets the collision masks.
 func set_masks() -> void:
-  set_collision_mask_value(3, hit_player)
-  set_collision_mask_value(4, hit_enemys)
-  target_finder.set_collision_mask_value(3, hit_player)
-  target_finder.set_collision_mask_value(4, hit_enemys)
-  hitbox.collision_mask = target_finder.collision_mask
-  target_finder.monitoring = not is_instance_valid(target)
-  hitbox.monitoring = hit_player || hit_enemys
+	set_collision_mask_value(3, hit_player)
+	set_collision_mask_value(4, hit_enemys)
+	target_finder.set_collision_mask_value(3, hit_player)
+	target_finder.set_collision_mask_value(4, hit_enemys)
+	hitbox.collision_mask = target_finder.collision_mask
+	target_finder.monitoring = not is_instance_valid(target)
+	hitbox.monitoring = hit_player || hit_enemys
+
 
 ## Moves the direction towards the target.
 func seek() -> void:
-  if is_instance_valid(target):
-    direction = direction + (global_position.direction_to(target.global_position) - direction) * steer_force
-  elif not target == null:
-    # target died (!)
-    target = null
-    target_finder.monitoring = true
+	if is_instance_valid(target):
+		direction = lerp(
+			direction, global_position.direction_to(target.global_position), steer_force * clampf(lifetime, 0, 1)
+		)
+	elif target_finder.monitoring == false:
+		target = null
+		target_finder.monitoring = true
+
 
 ## Highlights this hammer. See also [method unhighlight].
 func highlight() -> void:
-  outline_shader.set_shader_parameter(&"line_width", .75)
+	outline_shader.set_shader_parameter(&"line_width", .75)
+
 
 ## Un-highlights this hammer. See also [method highlight].
 func unhighlight() -> void:
-  outline_shader.set_shader_parameter(&"line_width", 0)
+	outline_shader.set_shader_parameter(&"line_width", 0)
+
 
 func _physics_process(delta: float) -> void:
-  lifetime -= delta
-  if lifetime < 0:
-    velocity.y += grav * delta
-    velocity.y = clampf(velocity.y, -terminal_velocity, terminal_velocity)
-  else:
-    seek()
-    velocity = (direction * acceleration * delta)
-    velocity.y = lerpf(velocity.y, 0, .2) # hard to move up
-  velocity = velocity.limit_length(top_speed)
-  rotation = velocity.angle() + PI/2 # face forward
-  global_position += velocity
+	lifetime -= delta
+	if lifetime < 0:
+		velocity.y += grav * delta
+	else:
+		seek()
+		velocity += (direction * acceleration * delta)
+		if velocity.y < 0:
+			velocity.y = lerpf(velocity.y, 0, .1)  # hard to move up
+	velocity.x = clampf(velocity.x, -top_speed, top_speed)
+	velocity.y = clampf(velocity.y, -top_speed, top_speed)
+	rotation = velocity.angle() + PI / 2  # face forward
+	global_position += velocity
+
 
 func _on_body_entered(_body: Node2D) -> void:
-  trail.emitting = false
-  target_finder.monitoring = false
-  hitbox.monitoring = false
-  set_collision_layer_value(7, true)
-  global_position += velocity.limit_length(1) # go into the wall a little
-  velocity = Vector2.ZERO
-  target = null
-  steer_force = 0.05
-  set_physics_process(false)
-  trail.clear_points()
+	trail.emitting = false
+	target_finder.monitoring = false
+	hitbox.monitoring = false
+	set_collision_layer_value(7, true)
+	global_position += velocity.limit_length(1)  # go into the wall a little
+	velocity = Vector2.ZERO
+	target = null
+	steer_force = 0.05
+	lifetime = 3
+	set_physics_process(false)
+	trail.clear_points()
+
 
 ## Throws this [Hammer].
 func throw(p_direction: Vector2) -> void:
-  set_collision_layer_value(7, false)
-  direction = p_direction
-  trail.emitting = true
-  set_physics_process(true)
-  set_masks()
+	print("throw")
+	set_collision_layer_value(7, false)
+	direction = p_direction
+	trail.emitting = true
+	set_physics_process(true)
+	set_masks()
 
 
 func _on_target_finder_node_entered(n: Node2D) -> void:
-  target = n
-  target_finder.set_deferred(&"monitoring", false)
+	target = n
+	target_finder.set_deferred(&"monitoring", false)
