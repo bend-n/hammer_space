@@ -1,6 +1,6 @@
 {
 	"@bendn/remap": {
-		"version": "4.1.4",
-		"integrity": "sha512-IlGcorFMwtOF+Euo/T63IOnnwFOILT1PxI10n9B/2XSVpVZqv8Ztwtv9OGsNZxLJjOjJ/MESTxvaZTHw1piSgg=="
+		"version": "4.2.0",
+		"integrity": "sha512-ce6itKgaxdYEwTy3L7j6DARFJWOu345A/SarvycreDme0MRPyp388xdKtjG1XGELJb3vwmWhRzZOGDiAqZvFvQ=="
 	}
 }

@@ -1,6 +1,6 @@
 {
     "name": "hammer_space",
     "packages": {
-        "@bendn/remap": "4.1.4"
+        "@bendn/remap": "4.2.0"
     }
 }
