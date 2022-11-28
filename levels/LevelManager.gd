@@ -34,9 +34,6 @@ var sorted := [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 func _init() -> void:
 	Globals.levelmanager = self
 
-func _exit_tree() -> void:
-	Globals.levelmanager = null
-
 func _ready() -> void:
 	gen_map()
 	lvl_position = size / 2
@@ -102,3 +99,4 @@ func gen_map() -> void:
 		map.append(map_row)
 	map[lvl_position.x][lvl_position.y] = start
 	world_generated.emit(maze)
+

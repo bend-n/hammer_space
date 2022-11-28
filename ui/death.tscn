@@ -1,0 +1,224 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn6ky6p73m8ql"]
+
+[ext_resource type="Theme" uid="uid://b5sr8elfovyw3" path="res://ui/main.theme.tres" id="1_nt3eu"]
+[ext_resource type="Script" path="res://ui/death.gd" id="2_hhnyk"]
+
+[sub_resource type="GDScript" id="GDScript_oq2ol"]
+resource_name = "retry"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().reload_current_scene()
+"
+
+[sub_resource type="GDScript" id="GDScript_iaxx2"]
+resource_name = "exit"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().change_scene_to_file(\"res://ui/start.tscn\")
+	MusicPlayer.s()
+"
+
+[sub_resource type="Animation" id="Animation_m6ka6"]
+resource_name = "death"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cc/VBoxContainer/death:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.960784, 0.32549, 0.32549, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cc/VBoxContainer/death:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 0.7),
+"transitions": PackedFloat32Array(-2, 2, -2),
+"update": 0,
+"values": [40, 80, 50]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cc/VBoxContainer/butts:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1),
+"transitions": PackedFloat32Array(1, 1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cc/VBoxContainer/butts/retry:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9, 4.70469),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cc/VBoxContainer/butts/exit:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.9, 4.70469),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_fn85o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cc/VBoxContainer/death:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.933333, 0.909804, 0.835294, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cc/VBoxContainer/death:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cc/VBoxContainer/butts:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cc/VBoxContainer/butts/retry:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cc/VBoxContainer/butts/exit:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whyfm"]
+_data = {
+"RESET": SubResource("Animation_fn85o"),
+"death": SubResource("Animation_m6ka6")
+}
+
+[node name="death" type="ColorRect" node_paths=PackedStringArray("focus")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nt3eu")
+color = Color(0, 0, 0, 0.784314)
+script = ExtResource("2_hhnyk")
+focus = NodePath("cc/VBoxContainer/butts/retry")
+
+[node name="cc" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="cc"]
+offset_left = 77.0
+offset_top = 79.0
+offset_right = 243.0
+offset_bottom = 241.0
+
+[node name="death" type="Label" parent="cc/VBoxContainer"]
+offset_right = 166.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.933333, 0.909804, 0.835294, 1)
+theme_override_font_sizes/font_size = 40
+text = "you died"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="cc/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 3
+anchors_preset = 0
+offset_top = 48.0
+offset_right = 166.0
+offset_bottom = 68.0
+
+[node name="butts" type="VBoxContainer" parent="cc/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+offset_top = 72.0
+offset_right = 166.0
+offset_bottom = 162.0
+
+[node name="retry" type="Button" parent="cc/VBoxContainer/butts"]
+offset_left = 20.0
+offset_right = 146.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+disabled = true
+text = "try again"
+script = SubResource("GDScript_oq2ol")
+
+[node name="exit" type="Button" parent="cc/VBoxContainer/butts"]
+offset_left = 14.0
+offset_top = 47.0
+offset_right = 152.0
+offset_bottom = 90.0
+size_flags_horizontal = 4
+disabled = true
+text = "main menu"
+script = SubResource("GDScript_iaxx2")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_whyfm")
+}

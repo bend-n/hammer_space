@@ -8,6 +8,10 @@ const WallJumpEffect := preload("res://fx/wall_dust.tscn")
 
 signal hp_changed(health: int)
 
+
+## Death overlay.
+@export var death: Popuppable
+
 ## Accel
 @export var accel := 512
 
@@ -74,6 +78,7 @@ var health := max_health:
 		health = hp
 		hp_changed.emit(hp)
 		if hp == 0:
+			death.open()
 			queue_free()
 
 
@@ -139,14 +144,15 @@ func apply_friction(input: float) -> void:
 
 func hammer_highlight() -> void:
 	if not current_hammer:
-		var hamms := pickup_area.get_overlapping_areas()
-		if hamms.is_empty():
-			if last_highlit:
+		var unhighlight := func unhighlight() -> void:
+			if is_instance_valid(last_highlit):
 				last_highlit.unhighlight()
 				last_highlit = null
+		var hamms := pickup_area.get_overlapping_areas()
+		if hamms.is_empty():
+			unhighlight.call()
 		elif not last_highlit in hamms:
-			if last_highlit:
-				last_highlit.unhighlight()
+			unhighlight.call()
 			last_highlit = hamms[0]
 			hamms[0].highlight()
 
@@ -292,6 +298,9 @@ func wall_detatch(wall_axis: int, delta: float) -> void:
 
 func hit(damage: int) -> void:
 	health -= damage
+	for pad in Input.get_connected_joypads():
+		Input.start_joy_vibration(pad, .3 * damage, .3 * damage, .5)
+
 
 ## Disable the aim gizmo.
 func disable_aim_gizmo() -> void:

@@ -13,4 +13,6 @@ func _ready():
 
 
 func _hp_changed(hp: int):
+	if hp == 0:
+		full.hide()
 	full.size.x = hp * 5 + 1

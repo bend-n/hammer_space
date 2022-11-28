@@ -9,7 +9,7 @@ func _ready() -> void:
 func p() -> void:
 	stream = track
 	pitch_scale = 1 + randf_range(-0.05, 0.05)
-	volume_db = -30
+	volume_db = -20
 	play()
 
 func s() -> void:

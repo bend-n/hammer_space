@@ -107,7 +107,6 @@ func _on_body_entered(_body: Node2D) -> void:
 
 ## Throws this [Hammer].
 func throw(p_direction: Vector2) -> void:
-	print("throw")
 	set_collision_layer_value(7, false)
 	direction = p_direction
 	trail.emitting = true
