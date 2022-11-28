@@ -8,17 +8,17 @@ signal close
 @export var focus: Control
 
 func open() -> void:
-  show()
-  if focus is RemapButton:
-    focus.button.grab_focus()
-  else:
-    focus.grab_focus()
+	show()
+	if focus is RemapButton:
+		focus.button.grab_focus()
+	else:
+		focus.grab_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
-  if visible and event.is_action("ui_cancel"):
-    accept_event()
-    exit()
+	if visible and event.is_action("ui_cancel"):
+		accept_event()
+		exit()
 
 func exit() -> void:
-  close.emit()
-  hide()
+	close.emit()
+	hide()
