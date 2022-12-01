@@ -22,11 +22,17 @@ static func value_types(arr: Array) -> Array:
 static func is_in_range(val: float, start: float, end: float) -> bool:
 	return val >= start and val <= end
 
+static func instance(n: Node, on: Node) -> Node:
+	on.add_child(n)
+	return n
+
 static func instance_scene(scene: PackedScene, position: Vector2, on: Node) -> Node:
-	var instance := scene.instantiate() as Node2D
-	on.add_child(instance)
-	instance.global_position = position
-	return instance
+	var n := scene.instantiate() as Node2D
+	n.global_position = position
+	return Util.instance(n, on)
+
+func instance_on_main(n: Node) -> Node:
+	return Util.instance(n, get_tree().current_scene)
 
 func instance_scene_on_main(scene: PackedScene, position: Vector2) -> Node:
 	return Util.instance_scene(scene, position, get_tree().current_scene)
