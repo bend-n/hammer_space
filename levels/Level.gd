@@ -25,7 +25,7 @@ var completed := false:
 @onready var has_enemys := enemyqty != 0
 
 @onready var blockdoors: Node2D
-@onready var doors: Node2D = create_node(&"doors")
+@onready var doors: Node2D
 
 
 ## Utility fuction to create a [Node2D]
@@ -47,6 +47,7 @@ func _ready():
 	if !door_array.is_empty():
 		if has_enemys:
 			blockdoors = create_node(&"block_doors")
+		doors = create_node(&"doors")
 
 		for door_p in door_array:
 			var door := add_door(door_p)
