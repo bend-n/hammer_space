@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dup8mgagrc2b6"]
+
+[ext_resource type="Script" path="res://world/moving_platform/moving_platform.gd" id="1_0sweg"]
+[ext_resource type="Texture2D" uid="uid://cdg0t1suvcfmt" path="res://assets/world/moving_platform.png" id="1_43vys"]
+
+[sub_resource type="Curve2D" id="Curve2D_jodtc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ri1c"]
+size = Vector2(34, 10)
+
+[sub_resource type="Animation" id="Animation_oma2q"]
+resource_name = "play"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("follower:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_skbcv"]
+_data = {
+"play": SubResource("Animation_oma2q")
+}
+
+[node name="MovingPlatform" type="Path2D"]
+curve = SubResource("Curve2D_jodtc")
+script = ExtResource("1_0sweg")
+
+[node name="follower" type="PathFollow2D" parent="."]
+position = Vector2(0, 5)
+rotates = false
+loop = false
+
+[node name="platf" type="AnimatableBody2D" parent="follower"]
+position = Vector2(0, -5)
+
+[node name="sprite" type="Sprite2D" parent="follower/platf"]
+texture = ExtResource("1_43vys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follower/platf"]
+visible = false
+shape = SubResource("RectangleShape2D_0ri1c")
+one_way_collision = true
+
+[node name="player" type="AnimationPlayer" parent="."]
+autoplay = "play"
+libraries = {
+"": SubResource("AnimationLibrary_skbcv")
+}
