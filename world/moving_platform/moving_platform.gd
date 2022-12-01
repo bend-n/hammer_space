@@ -4,3 +4,4 @@ extends Node2D
 
 func _ready() -> void:
 	$player.playback_speed = playback_speed
+

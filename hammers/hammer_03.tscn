@@ -4,32 +4,32 @@
 [ext_resource type="Texture2D" uid="uid://blx67dnlqysnc" path="res://assets/hammers/hammer03.png" id="2_0uj7a"]
 [ext_resource type="Shader" path="res://hammers/hammer_outline.gdshader" id="2_huryw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wq5re"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjagk"]
 resource_local_to_scene = true
 shader = ExtResource("2_huryw")
 shader_parameter/light_offset = 1.0
 shader_parameter/line_width = 0.0
 shader_parameter/sin_frequency = 0.25
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xwsd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvd8k"]
 size = Vector2(8, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lidys"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f12fv"]
 size = Vector2(8, 12)
 
 [node name="Hammer03" instance=ExtResource("1_wc0io")]
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_wq5re")
+material = SubResource("ShaderMaterial_xjagk")
 texture = ExtResource("2_0uj7a")
 
 [node name="Collision" parent="." index="2"]
-shape = SubResource("RectangleShape2D_2xwsd")
+shape = SubResource("RectangleShape2D_fvd8k")
 
 [node name="Hitbox" parent="." index="3"]
 damage = 3
 
 [node name="Collision" parent="Hitbox" index="0"]
-shape = SubResource("RectangleShape2D_lidys")
+shape = SubResource("RectangleShape2D_f12fv")
 
 [editable path="Hitbox"]

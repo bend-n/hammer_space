@@ -157,7 +157,7 @@ func hammer_highlight() -> void:
 			hamms[0].highlight()
 
 func hammer_pickup() -> void:
-	if Input.is_action_just_pressed("pickup") and last_highlit and not current_hammer:
+	if Input.is_action_just_pressed("pickup") and is_instance_valid(last_highlit) and not current_hammer:
 		last_highlit.unhighlight()
 		current_hammer = last_highlit
 		Globals.levelmanager.current_level.remove_child(current_hammer)

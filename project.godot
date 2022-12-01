@@ -235,6 +235,7 @@ throw={
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="hammer"
 2d_physics/layer_7="hammer_inactive"
+2d_physics/layer_8="moving_platform"
 
 [logging]
 
