@@ -16,7 +16,7 @@ shader_parameter/line_width = 0.0
 shader_parameter/sin_frequency = 0.25
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jubww"]
-radius = 70.0
+radius = 125.0
 
 [node name="Hammer" type="Area2D"]
 texture_filter = 1
@@ -60,8 +60,17 @@ monitorable = false
 shape = SubResource("CircleShape2D_jubww")
 
 [node name="Head" type="Marker2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="LeftCast" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(0, -6)
+target_position = Vector2(-4, -15)
+
+[node name="RightCast" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -6)
+target_position = Vector2(4, -15)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="TargetFinder" to="." method="_on_target_finder_node_entered"]
