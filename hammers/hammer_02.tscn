@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcpy0wbrlmqsq" path="res://assets/hammers/hammer02.png" id="2_dmvhv"]
 [ext_resource type="Shader" path="res://hammers/hammer_outline.gdshader" id="2_rf70p"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xuktl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spgi1"]
 resource_local_to_scene = true
 shader = ExtResource("2_rf70p")
 shader_parameter/light_offset = 1.0
@@ -14,7 +14,7 @@ shader_parameter/sin_frequency = 0.25
 [node name="Hammer02" instance=ExtResource("1_vy2k1")]
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_xuktl")
+material = SubResource("ShaderMaterial_spgi1")
 texture = ExtResource("2_dmvhv")
 
 [node name="Hitbox" parent="." index="3"]

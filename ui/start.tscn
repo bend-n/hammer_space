@@ -34,7 +34,6 @@ focus = NodePath("VBox/StartButton")
 metadata/_edit_vertical_guides_ = []
 
 [node name="VBox" type="VBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -48,21 +47,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBox" groups=["button"]]
-layout_mode = 2
 offset_right = 172.0
 offset_bottom = 43.0
 text = "start"
 script = SubResource("GDScript_52jbq")
 
 [node name="CfgButtton" type="Button" parent="VBox" groups=["button"]]
-layout_mode = 2
 offset_top = 47.0
 offset_right = 172.0
 offset_bottom = 90.0
 text = "configure"
 
 [node name="ExitButton" type="Button" parent="VBox" groups=["button"]]
-layout_mode = 2
 offset_top = 94.0
 offset_right = 172.0
 offset_bottom = 137.0
@@ -72,7 +68,6 @@ script = SubResource("GDScript_vtoxm")
 [node name="cfg" parent="." instance=ExtResource("2_sqamp")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
 
 [connection signal="pressed" from="VBox/CfgButtton" to="cfg" method="open"]
 [connection signal="close" from="cfg" to="." method="open"]

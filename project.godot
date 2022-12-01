@@ -134,11 +134,6 @@ Events="*res://autoloads/Events.gd"
 SoundManager="*res://autoloads/sound_manager.tscn"
 MusicPlayer="*res://autoloads/MusicPlayer.gd"
 
-[debug]
-
-gdscript/warnings/return_value_discarded=false
-gdscript/warnings/integer_division=0
-
 [display]
 
 window/size/viewport_width=320

@@ -136,6 +136,16 @@ func throw(p_direction: Vector2) -> void:
 	set_physics_process(true)
 
 
-func _on_target_finder_node_entered(n: Node2D) -> void:
-	target = n
+func _on_target_finder_node_entered(_n: Node2D) -> void:
+	var bods: Array[Node2D] = target_finder.get_overlapping_bodies() + target_finder.get_overlapping_areas()
+	var space = get_world_2d().direct_space_state
+	var current := {closest = null, dist = 0}
+	for bod in bods:
+		var res := space.intersect_ray(PhysicsRayQueryParameters2D.create(global_position, bod.global_position.move_toward(global_position, .1), pow(2, 1-1)))
+		if res.is_empty():
+			var dist := global_position.distance_to(bod.global_position)
+			if current.dist < dist:
+				current.dist = dist
+				current.closest = bod
+	target = current.closest
 	target_finder.set_deferred(&"monitoring", false)
