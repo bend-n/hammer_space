@@ -39,6 +39,7 @@ func create_node(p_name: StringName) -> Node2D:
 
 
 func _ready():
+	collision_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_HIDE
 	var door_array := Maze.tile_4b_to_path_array(enabled_walls)
 
 	if completed:

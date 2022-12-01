@@ -6,11 +6,11 @@ class_name Hammer
 
 @onready var left_cast := $LeftCast as RayCast2D
 @onready var right_cast := $RightCast as RayCast2D
-@onready var head := $Head as Marker2D
 @onready var trail := $Trail as Trail2D
 @onready var outline_shader := ($Sprite as Sprite2D).material as ShaderMaterial
 @onready var target_finder := $TargetFinder as Area2D
 @onready var hitbox := $Hitbox as Hitbox
+@onready var hitbox_c := hitbox.get_child(0)
 
 ## The current velocity
 var velocity := Vector2.ZERO
@@ -47,6 +47,7 @@ enum HITS {_a, _b, _c, PLAYER, ENEMY, NONE}
 		for node in hitmasks:
 			node.set_collision_mask_value(hits, true)
 		target_finder.monitoring = not is_instance_valid(target)
+		hitbox_c.shape.size.x = 6 if hits == HITS.ENEMY else 2
 
 ## The amount of time before gravity kicks in.
 @export var lifetime := 3.0
@@ -67,7 +68,7 @@ func dirlerp(to: Vector2) -> void:
 ## Moves the direction towards the target.
 func seek() -> void:
 	if is_instance_valid(target):
-		dirlerp(head.global_position.direction_to(target.global_position))
+		dirlerp(global_position.direction_to(target.global_position))
 	elif target_finder.monitoring == false:
 		target = null
 		target_finder.monitoring = true
@@ -76,7 +77,7 @@ func seek() -> void:
 func anticrash() -> void:
 	var is_wall := func is_wall(ray: RayCast2D) -> bool:
 		if not ray.is_colliding(): return false
-		if target and ray.get_collider().get_class() == target.get_class(): return false
+		if is_instance_valid(target) and ray.get_collider().get_class() == target.get_class(): return false
 		return true
 
 	var results: Array[bool] = [is_wall.call(left_cast), is_wall.call(right_cast)]
@@ -84,7 +85,7 @@ func anticrash() -> void:
 
 	for i in range(2):
 		if results[i]:
-			dirlerp(direction.rotated(steer_force if i == 0 else -steer_force))
+			dirlerp(direction.rotated(0.174 if i == 0 else -0.174))
 
 ## Highlights this hammer. See also [method unhighlight].
 func highlight() -> void:
