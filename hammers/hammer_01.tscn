@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://hammers/hammer_outline.gdshader" id="2_le3ds"]
 [ext_resource type="Texture2D" uid="uid://dcf5es758pw1n" path="res://assets/hammers/hammer01.png" id="2_sdlv5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jbfp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mr4f6"]
 resource_local_to_scene = true
 shader = ExtResource("2_le3ds")
 shader_parameter/light_offset = 1.0
@@ -14,7 +14,7 @@ shader_parameter/sin_frequency = 0.25
 [node name="Hammer01" instance=ExtResource("1_350hj")]
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_7jbfp")
+material = SubResource("ShaderMaterial_mr4f6")
 texture = ExtResource("2_sdlv5")
 
 [editable path="Hitbox"]

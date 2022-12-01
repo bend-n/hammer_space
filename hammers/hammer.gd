@@ -19,11 +19,22 @@ var direction := Vector2.ZERO
 ## The amount it can turn towards its target
 @export var steer_force = 0.05
 
-## To hit the player
-@export var hit_player := true
+## The hit enum.
+enum HITS {_a, _b, _c, PLAYER, ENEMY, NONE}
 
-## To hit the enemys
-@export var hit_enemys := false
+## Pick which layers to hit.
+@export var hits: HITS = HITS.PLAYER:
+	set(value):
+		set_collision_mask_value(hits, false)
+		target_finder.set_collision_mask_value(hits, false)
+		hits = value
+		hitbox.monitoring = hits != HITS.NONE
+		if value == HITS.NONE:
+			return
+		set_collision_mask_value(hits, true)
+		target_finder.set_collision_mask_value(hits, true)
+		target_finder.monitoring = not is_instance_valid(target)
+		hitbox.collision_mask = target_finder.collision_mask
 
 ## The amount of time before gravity kicks in.
 @export var lifetime := 3.0
@@ -34,6 +45,7 @@ var direction := Vector2.ZERO
 ## The target
 var target: Node2D = null
 
+@onready var head := $Head as Marker2D
 @onready var trail := $Trail as Trail2D
 @onready var outline_shader := ($Sprite as Sprite2D).material as ShaderMaterial
 @onready var target_finder := $TargetFinder as Area2D
@@ -41,30 +53,30 @@ var target: Node2D = null
 
 
 func _ready() -> void:
-	set_masks()
-
-
-## Sets the collision masks.
-func set_masks() -> void:
-	set_collision_mask_value(3, hit_player)
-	set_collision_mask_value(4, hit_enemys)
-	target_finder.set_collision_mask_value(3, hit_player)
-	target_finder.set_collision_mask_value(4, hit_enemys)
-	hitbox.collision_mask = target_finder.collision_mask
-	target_finder.monitoring = not is_instance_valid(target)
-	hitbox.monitoring = hit_player || hit_enemys
+	hits = hits
 
 
 ## Moves the direction towards the target.
 func seek() -> void:
 	if is_instance_valid(target):
 		direction = lerp(
-			direction, global_position.direction_to(target.global_position), steer_force * clampf(lifetime, 0, 1)
+			direction, head.global_position.direction_to(target.global_position), steer_force * clampf(lifetime, 0, 1)
 		)
 	elif target_finder.monitoring == false:
 		target = null
 		target_finder.monitoring = true
 
+# func anticrash() -> void:
+# 	var space := get_world_2d().direct_space_state
+# 	var param := PhysicsRayQueryParameters2D.create(head.global_position, head.global_position + (direction * 10), pow(2, 1-1) + pow(2, hits - 1))
+# 	var result := space.intersect_ray(param)
+# 	if result.is_empty() or result.collider is Player or result.collider is Enemy:
+# 		return
+# 	direction = lerp(
+# 		direction,
+# 		direction.bounce(head.global_position.direction_to(result.position)),
+# 		steer_force * clampf(lifetime, 0, 1)
+# 	)
 
 ## Highlights this hammer. See also [method unhighlight].
 func highlight() -> void:
@@ -82,6 +94,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += grav * delta
 	else:
 		seek()
+#		anticrash()
 		velocity += (direction * acceleration * delta)
 		if velocity.y < 0:
 			velocity.y = lerpf(velocity.y, 0, .1)  # hard to move up
@@ -111,7 +124,6 @@ func throw(p_direction: Vector2) -> void:
 	direction = p_direction
 	trail.emitting = true
 	set_physics_process(true)
-	set_masks()
 
 
 func _on_target_finder_node_entered(n: Node2D) -> void:

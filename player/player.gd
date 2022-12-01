@@ -312,11 +312,10 @@ func disable_aim_gizmo() -> void:
 func throw(rot: float) -> void:
 	rot += randf_range(-0.01, 0.01)
 	remove_child(current_hammer)
-	current_hammer.position.x = 0 # center
+	current_hammer.position = Vector2(0, -8) # center
 	current_hammer.global_position = to_global(current_hammer.position)
 	Globals.levelmanager.current_level.add_child(current_hammer)
-	current_hammer.hit_player = false
-	current_hammer.hit_enemys = true
+	current_hammer.hits = Hammer.HITS.ENEMY
 	current_hammer.throw(Vector2.from_angle(rot))
 	SoundManager.play("throw", -15)
 	current_hammer = null

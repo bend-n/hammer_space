@@ -51,12 +51,17 @@ visible = false
 shape = ExtResource("2_tgkvf")
 
 [node name="TargetFinder" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitorable = false
 
 [node name="Collision" type="CollisionShape2D" parent="TargetFinder"]
 shape = SubResource("CircleShape2D_jubww")
+
+[node name="Head" type="Marker2D" parent="."]
+visible = false
+position = Vector2(0, -6)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="TargetFinder" to="." method="_on_target_finder_node_entered"]
