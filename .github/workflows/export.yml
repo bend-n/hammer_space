@@ -1,0 +1,28 @@
+name: "export" # name of the workflow
+on: # when it is triggered
+  workflow_dispatch: # manually or
+  push: # on a push
+    branches:
+      - main # to this branch
+    paths: # with modifications to these files
+      - "**.gd" # all gdscript files
+      - "**.tscn" # scene files
+      - "**.import" # this means a png changed
+      - "**.tres" # godot resources
+      - "**.ttf" # fonts in godot3 dont have their own .import
+      - ".github/workflows/export.yml" # this workflow
+      - "export_presets.cfg" # the export template
+
+jobs: # the things to do
+  export: # a thing to do
+    uses: bend-n/godot-actions/.github/workflows/callable-export.yml@main
+    with: # variables
+      godot-version: 4.0.beta # the godot version
+      image: ghcr.io/bend-n/godot-2d:4.0.beta # the container to use
+      export-name: "hammer space" # the name of the exec. ($export-name.exe)
+      platforms: "windows linux web mac" # space seperated list of platforms to build
+      project-root-path: "." # the directory that project.godot is in
+      github-pages: "no" # to deploy to github pages or not (anything besides 'true' == false)
+      itch-path: "bendn/hammers" # required for itch.io deployment.
+    secrets: # secrets
+      butler-api-key: ${{ secrets.BUTLER_CREDENTIALS }} # required for itch.io deployment
