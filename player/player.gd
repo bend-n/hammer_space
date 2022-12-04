@@ -77,7 +77,7 @@ var health := max_health:
 	set(hp):
 		health = hp
 		hp_changed.emit(hp)
-		if hp == 0:
+		if hp <= 0:
 			death.open()
 			queue_free()
 
