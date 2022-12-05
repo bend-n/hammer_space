@@ -17,8 +17,7 @@ jobs: # the things to do
   export: # a thing to do
     uses: bend-n/godot-actions/.github/workflows/callable-export.yml@main
     with: # variables
-      godot-version: 4.0.beta # the godot version
-      image: ghcr.io/bend-n/godot-2d:4.0.beta # the container to use
+      image: ghcr.io/bend-n/godot:4.0.beta # the container to use
       export-name: "hammer space" # the name of the exec. ($export-name.exe)
       platforms: "windows linux web mac" # space seperated list of platforms to build
       project-root-path: "." # the directory that project.godot is in
