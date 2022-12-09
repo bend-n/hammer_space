@@ -60,6 +60,7 @@ enum HITS {_a, _b, NONE, PLAYER, ENEMY}
 var target: Node2D = null
 
 func _ready() -> void:
+	unhighlight()
 	hits = hits
 
 ## Lerps direction towards [param to].
