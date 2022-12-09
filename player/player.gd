@@ -153,6 +153,7 @@ func hammer_highlight() -> void:
 			unhighlight.call()
 		elif not last_highlit in hamms:
 			unhighlight.call()
+			hamms.sort_custom(func(a: Area2D, b: Area2D) -> bool: return a.global_position.distance_to(global_position) < b.global_position.distance_to(global_position))
 			last_highlit = hamms[0]
 			hamms[0].highlight()
 

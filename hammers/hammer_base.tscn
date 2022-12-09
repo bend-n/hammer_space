@@ -15,7 +15,7 @@ shader_parameter/line_width = 0.0
 shader_parameter/sin_frequency = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fffa1"]
-size = Vector2(2, 12)
+size = Vector2(1, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjww"]
 size = Vector2(6, 12)
@@ -29,8 +29,8 @@ collision_layer = 32
 script = ExtResource("1_xp22t")
 
 [node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("target")]
-position = Vector2(0, -6)
 z_index = -1
+position = Vector2(0, -6)
 points = PackedVector2Array(0, 0)
 width = 3.0
 width_curve = ExtResource("4_yvshk")
@@ -65,12 +65,22 @@ shape = SubResource("CircleShape2D_jubww")
 debug_color = Color(0, 0.941176, 0.352941, 0.12549)
 
 [node name="LeftCast" type="RayCast2D" parent="."]
-position = Vector2(0, -6)
+enabled = false
 target_position = Vector2(-5, -29)
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="RightCast" type="RayCast2D" parent="."]
-position = Vector2(0, -6)
+enabled = false
 target_position = Vector2(5, -29)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="TargetCast" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, -200)
+collide_with_areas = true
+collide_with_bodies = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="TargetFinder" to="." method="_on_target_finder_node_entered"]

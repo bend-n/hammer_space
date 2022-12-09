@@ -6,11 +6,13 @@ class_name Hammer
 
 @onready var left_cast := $LeftCast as RayCast2D
 @onready var right_cast := $RightCast as RayCast2D
+@onready var target_cast := $TargetCast as RayCast2D
 @onready var trail := $Trail as Trail2D
 @onready var outline_shader := ($Sprite as Sprite2D).material as ShaderMaterial
 @onready var target_finder := $TargetFinder as Area2D
 @onready var hitbox := $Hitbox as Hitbox
-@onready var hitbox_c := hitbox.get_child(0)
+@onready var hitbox_c := hitbox.get_child(0) as CollisionShape2D
+@onready var c := $Collision as CollisionShape2D
 
 ## The current velocity
 var velocity := Vector2.ZERO
@@ -25,13 +27,13 @@ var direction := Vector2.ZERO
 @export var top_speed := 3.0
 
 ## The amount it can turn towards its target
-@export var steer_force = 0.05
+@export var steer_force = 0.01
 
 ## The hit enum.
-enum HITS {_a, _b, _c, PLAYER, ENEMY, NONE}
+enum HITS {_a, _b, NONE, PLAYER, ENEMY}
 
-## These nodes want to have their collision mask set.
-@onready var hitmasks = [target_finder, hitbox, left_cast, right_cast, self]
+## These nodes want to have their collision mask set to the current enemy.
+@onready var hitmasks = [target_finder, hitbox, left_cast, right_cast, self, target_cast]
 
 ## Pick which layers to hit.
 @export var hits: HITS = HITS.PLAYER:
@@ -40,14 +42,13 @@ enum HITS {_a, _b, _c, PLAYER, ENEMY, NONE}
 			node.set_collision_mask_value(hits, false)
 		hits = value
 		hitbox.monitoring = hits != HITS.NONE
-		left_cast.enabled = hits != HITS.NONE
-		right_cast.enabled = hits != HITS.NONE
+		target_finder.monitoring = not is_instance_valid(target)
 		if value == HITS.NONE:
 			return
 		for node in hitmasks:
 			node.set_collision_mask_value(hits, true)
-		target_finder.monitoring = not is_instance_valid(target)
-		hitbox_c.shape.size.x = 6 if hits == HITS.ENEMY else 2
+		hitbox_c.shape.size.x = 8 if hits == HITS.ENEMY else 1
+		c.shape.size.x = 8 if hits == HITS.ENEMY else 1
 
 ## The amount of time before gravity kicks in.
 @export var lifetime := 3.0
@@ -68,17 +69,24 @@ func dirlerp(to: Vector2) -> void:
 ## Moves the direction towards the target.
 func seek() -> void:
 	if is_instance_valid(target):
+		target_cast.force_raycast_update()
+		if is_enemy(target_cast.get_collider()): # course is good, dont touch anything
+			return
 		dirlerp(global_position.direction_to(target.global_position))
+		anticrash()
 	elif target_finder.monitoring == false:
 		target = null
 		target_finder.monitoring = true
 
+func is_enemy(n) -> bool:
+	if is_instance_valid(target) and is_instance_valid(n) and n.get_class() == target.get_class(): return true
+	return false
+
 ## Tries not to crash.
 func anticrash() -> void:
 	var is_wall := func is_wall(ray: RayCast2D) -> bool:
-		if not ray.is_colliding(): return false
-		if is_instance_valid(target) and ray.get_collider().get_class() == target.get_class(): return false
-		return true
+		ray.force_raycast_update()
+		return not is_enemy(ray.get_collider())
 
 	var results: Array[bool] = [is_wall.call(left_cast), is_wall.call(right_cast)]
 	if results.count(true) == 2: return # resign to our fate
@@ -103,7 +111,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y += grav * delta
 	else:
 		seek()
-		anticrash()
 		velocity += (direction * acceleration * delta)
 		if velocity.y < 0:
 			velocity.y = lerpf(velocity.y, 0, .1)  # hard to move up
@@ -112,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	rotation = velocity.angle() + PI / 2  # face forward
 	global_position += velocity
 
-
+# we crashed
 func _on_body_entered(_body: Node2D) -> void:
 	trail.emitting = false
 	target_finder.monitoring = false
@@ -137,6 +144,9 @@ func throw(p_direction: Vector2) -> void:
 
 
 func _on_target_finder_node_entered(_n: Node2D) -> void:
+	if target != null:
+		push_error("Huh.")
+		return
 	var bods: Array[Node2D] = target_finder.get_overlapping_bodies() + target_finder.get_overlapping_areas()
 	var space = get_world_2d().direct_space_state
 	var current := {closest = null, dist = 0}
@@ -147,5 +157,6 @@ func _on_target_finder_node_entered(_n: Node2D) -> void:
 			if current.dist < dist:
 				current.dist = dist
 				current.closest = bod
-	target = current.closest
-	target_finder.set_deferred(&"monitoring", false)
+	if current.closest != null:
+		target = current.closest
+		target_finder.set_deferred(&"monitoring", false)
