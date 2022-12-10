@@ -1,11 +1,6 @@
 extends Level
 
 func _ready() -> void:
-	var lm: LevelManager = Globals.levelmanager
-	var maze: Maze = lm.maze
-	if !maze:
-		maze = await lm.world_generated
-	enabled_walls = (maze.get_cellv(lm.size / 2))
 	const wm := {
 		Vector2i.UP: [Vector2i(7, 0), Vector2i(8, 0)],
 		Vector2i.DOWN: [Vector2i(7, 15), Vector2i(8, 15)],

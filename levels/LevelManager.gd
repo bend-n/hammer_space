@@ -16,8 +16,8 @@ var completed_levels: Array[Vector2i] = []
 ## Maze size
 @export var size := Vector2i(10, 10)
 
-## ASSIGN TO Start.tscn
-@export var current_level: TileMap
+## The current level
+var current_level: TileMap
 @export var start: PackedScene
 @export var player: Player
 @onready var main := get_parent() as Node2D
@@ -26,19 +26,46 @@ var lvl_position := Vector2i(-1, -1)
 ## Timer used for debouncing multiple door enters. (some kind of physics bug there is probably a tracker for but i havent found it)
 var t: SceneTreeTimer
 
-@export var levels: Array[PackedScene]
-
-## type: PackedScene[15][∞]
-var sorted := [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+## type: PackedScene[14][∞]
+var levels := []
 
 func _init() -> void:
 	Globals.levelmanager = self
 
 func _ready() -> void:
+	populate_levels()
 	gen_map()
-	lvl_position = size / 2
 	Events.change_level.connect(go)
-	print_map_pretty()
+	if OS.is_debug_build():
+		# show sorted levels
+		for i in len(levels):
+			print(i, ":", " [")
+			for l in levels[i]:
+				print(l.resource_path.indent("\t"))
+			print("],")
+
+		# show the map
+		var string := ""
+		for row in map:
+			for item in row:
+				if "Start" in item.resource_path:
+					string += "na "
+				else:
+					string += "%02d " % item.get_state().get_node_property_value(0, 1)
+			string += "\n"
+		print(string)
+
+		# show the maze (for visual discrepancy parsing)
+		string = ""
+		for row in maze.maze:
+			for item in row:
+				string += "%02d " % item
+			string += "\n"
+		print(string)
+	lvl_position = size / 2
+	current_level = start.instantiate()
+	current_level.enabled_walls = maze.get_cellv(lvl_position)
+	main.call_deferred(&"add_child", (current_level))
 
 ## Goes to the next room in [param to] direction.
 func go(to: Vector2i) -> void:
@@ -60,34 +87,31 @@ func go(to: Vector2i) -> void:
 	else:
 		prints("welcome to", current_level.name)
 
-## Prints out the map prettily.
-## eg: [codeblock]
-## 14 16 04 08 08 10
-## 15 04 07 04 04 06
-## 12 09 12 05 11 05
-## 15 08 07 St 05 13
-## 12 08 06 15 02 05
-## 15 08 07 08 07 09
-## [/codeblock]
-func print_map_pretty() -> void:
-	var string := ""
-	for row in map:
-		for item in row:
-			string += str(item.get_state().get_node_name(0)).substr(0, 2) + " "
-		string += "\n"
-	print(string)
 
-## Split levels into [url=https://kidscancode.org/blog/img/cells_4bit.png]4bit wall[/url] groups.
-func sort_levels():
-	for level in levels:
-		# property idx 1 is the enabled walls
-		# if prop is not overriden, default to 0
-		var n: int = 0 if level.get_state().get_node_property_count(0) == 1 else level.get_state().get_node_property_value(0, 1)
-		sorted[n].append(level)
+# apparently lambdas cant do it
+func __inner_populate_loop(path := "res://levels/rand"):
+	var dir := DirAccess.open(path)
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while not file_name.is_empty():
+		if dir.current_is_dir():
+			__inner_populate_loop(path.path_join(file_name))
+		else:
+			file_name = file_name.trim_suffix('.remap') # <---- NEW
+			var level: PackedScene = load(path.path_join(file_name)) as PackedScene
+			# Split levels into wall groups groups.
+			levels[level.get_state().get_node_property_value(0, 1)].append(level)
+		file_name = dir.get_next()
+
+## Populates the levels array
+func populate_levels() -> void:
+	levels.clear()
+	levels = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+	__inner_populate_loop()
+
 
 ## Generates the maze.
 func gen_map() -> void:
-	sort_levels()
 	maze = Maze.new(size)
 	maze.image.save_png("res://maze.png")
 	lvl_position = size / 2
@@ -95,7 +119,7 @@ func gen_map() -> void:
 	for row in maze.maze:
 		var map_row: Array[PackedScene] = []
 		for i in row:
-			map_row.append(sorted[i][randi() % len(sorted[i])])
+			map_row.append(levels[i][randi() % len(levels[i])])
 		map.append(map_row)
 	map[lvl_position.x][lvl_position.y] = start
 	world_generated.emit(maze)
